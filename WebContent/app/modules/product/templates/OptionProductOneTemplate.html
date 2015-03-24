@@ -1,0 +1,28 @@
+<div class="row mand_choose">Choose only one：<%=groupName%></div>
+<div class="row option-one">
+	<%_.each(optionone,function (one){%>
+	<div class="col-md-3 col-sm-3">
+		<div class="panel panel-default js-one-option"
+			data-offer-id="<%= one.offerId %>"
+			data-offer-groupid="<%=one.offerGroupId%>"
+			data-eff-type="<%=one.effType%>" data-pro-necessary="0"
+			data-group-type="B">
+			<div class="panel-heading"><a class="head_a"><%=one.offerName%></a></div>
+			<div class="panel-body">
+				<div class="cabin-info">
+					<span class="highlight"><%=one.comments%></span>
+				</div>
+				<%if(one.offerAttrList){if(one.offerAttrList.attrValueDtoList&&one.offerAttrList.inputType===1){%><%=multi.offerAttrList.attrName%><select
+					class="form-control cabin-select" name="time">
+					<%if(one.offerAttrList.nullable === 'Y'){%>
+					<option value=""></option> <%}%>
+					<%_.each(one.offerAttrList.attrValueDtoList,function(attr){%>
+					<option value="<%=attr.attrId%>,<%=attr.value%>"><%=attr.valueMark%></option>
+					<%})%>
+				</select> <%}}%>
+				<div class="cabin-btn">Choose</div>
+			</div>
+		</div>
+	</div>
+	<%})%>
+</div>

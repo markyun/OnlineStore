@@ -1,0 +1,32 @@
+
+<div class="row">
+	<% _.each(phones, function(phone){ %>
+	<div class="col-md-4 col-sm-4 infor-phone"
+		data-model-id="<%=phone.goodsProdSpec.modelId%>"
+		data-offer-id="<%=efferId%>" data-eff-type="<%=effType%>">
+		<div class="phone-box">
+			<div class="pull-left">
+				<img src="img/phone.png">
+			</div>
+			<div class="phone-body">
+				<h4 class="phone-name"><%=phone.goodsProdSpec.modelName%></h4>
+				<button type="button" class="btn btn-link"
+					data-offer-id="<%=phone.offerId%>"
+					data-goods-id="<%=phone.goodsProdSpec.goodsProdSpecId%>"
+					data-model-id="<%=phone.goodsProdSpec.modelId%>">View
+					details ></button>
+				<div class="phone-price">€<%=phone.saleListPrice/10000%></div>
+				<%if(select === phone.goodsProdSpec.modelId){%>
+				<div class="cabin-btn phone-btn active btn-phone" data-offer-id="<%=efferId%>"
+					data-eff-type="<%=effType%>"
+					data-model-id="<%=phone.goodsProdSpec.modelId%>">✔</div>
+				<%}else{%>
+				<div class="cabin-btn phone-btn btn-phone" data-offer-id="<%=efferId%>"
+					data-eff-type="<%=effType%>"
+					data-model-id="<%=phone.goodsProdSpec.modelId%>">Choose</div>
+				<%}%>
+			</div>
+		</div>
+	</div>
+	<%})%>
+</div>

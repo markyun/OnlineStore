@@ -1,0 +1,22 @@
+<div class="panel-heading">
+    <div class="step-tips">
+        <div class="current-step"><%= index %></div>
+        <hr class="boundary">
+        <div class="total-step"><%= total %></div>
+    </div>
+    <nav class="scroll-steps">
+        <% _.each(steps, function (step, index) { %>
+        <div class="scroll-step-item" data-index="<%= index %>">
+            <img src="img/item<%=index%>.PNG" class="step-icon">
+             <img src="img/item<%=index%>_hover.PNG" class=" img_hover step-icon">
+            <%= step.name %>
+        </div>
+        <% }) %>
+    </nav>
+</div>
+<div class="panel-body">
+
+</div>
+<div class="panel-footer">
+    <button type="button" class="btn btn-next js-step">Next</button>
+</div>

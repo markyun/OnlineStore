@@ -1,0 +1,33 @@
+<div class="fam_meb">
+	<!-- <div class="group-box 2 familyDiv">
+        <img src="img/2.PNG" alt="two people" />
+        <img src="img/2_hover.PNG"  class="img_hover" alt="two people" />
+    </div>
+    <div class="group-box 3 familyDiv">
+        <img src="img/3.PNG" alt="three people" />
+        <img src="img/3_hover.PNG"  class="img_hover" alt="three people" />
+    </div>
+    <div class="group-box 4 familyDiv">
+        <img src="img/4.PNG" alt="four people" />
+        <img src="img/4_hover.PNG"  class="img_hover" alt="three people" />
+    </div>
+    <div class="group-box 5 familyDiv">
+        <img src="img/5.PNG" alt="five people" />
+        <img src="img/5_hover.PNG"  class="img_hover" alt="three people" />
+    </div>
+    <div class="group-box familyDiv">
+        <img src="img/6.PNG" alt="six people" />
+        <img src="img/6_hover.PNG"  class="img_hover" alt="three people" />
+    </div> -->
+	<div class="form-group select-number">
+		<div>
+            <p>CHOOSE NUMBER PLEASE</p>
+			<select  class="form-control js-number">
+<!-- 				<option value="0" >Select number</option>
+ -->
+                <%for(var i=2; i<=limitList; i++){%>
+				<option value="<%=i%>"><%=i%></option> <%}%>
+			</select>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+<div class="group-fbox">
+    <div class="group-box group-num group-chice">
+        <div class="group-title">
+            <input type="text" class="group-input groupName" id="group-name" value="Group <%=number%>">
+        </div>
+        <div class="group-content">
+            <input type="text" class="group-input groupNum">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>eshop</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="frm/fish-desktop/dist/css/fish-desktop.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <header class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ZTESoft</a>
+            </div>
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="dropdown-m">
+                    <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
+                        <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                        <img src="img/1.jpg" alt="...">
+                      </span>Ma.Jinyun <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight">
+                        <li><span class="arrow top"></span><a href="#">设置</a>
+                        </li>
+                        <li> <a href="profile.html">用户设置</a> </li>
+                        <li><a href="#"><span class="badge bg-danger pull-right">3</span>消息 </a> </li>
+                        <li><a href="1.html">帮助</a>
+                        </li>
+                        <li><a href="#" data-toggle="ajaxModal">退出</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </header>
+
+    <div class="container" id="mainContent">
+
+
+        <!-- 111111111111111 -->
+ <div class="row step-header">
+    <span class="step-info">You Subscriber List:</span>
+    <span class="step-detail"></span>
+</div>
+<div class="panel-body subscriber-list">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <h3>13813896684</h3>
+            </div>
+            <div class="col-md-6">
+                <p> <span>Status</span> <span>Nomal</span> </p>
+            </div>
+            <div class="col-md-6">
+                <p> <span>Subscriber plan</span> <span>Qzone for collage 2014</span> </p>
+            </div>
+            <div class="col-md-6">
+                <p> <span>serivce start Date </span> <span>2015-03-06</span> </p>
+            </div>
+            <div class="col-md-6">
+                <p> <span>serivce end Date </span> <span>2016-03-06</span> </p>
+            </div>
+            <div class="col-md-12">
+                <a class="btn btn-step" href="#plan">Change plan</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row step-footer">
+
+</div>
+
+        <!-- Orderlist end -->
+
+    </div>
+
+    <script src="frm/fish-desktop/dist/js/fish-desktop-all.js"></script>
+    <script src="frm/fish-desktop/dist/libs/backbone-1.1.2.js"></script>
+    <script src="frm/fish-desktop/dist/js/fish-desktop-require.js"></script>
+
+    <script>
+    $(function() {
+        $(".i-checks-i").click(function() {
+            // $(this).toggleClass('open').
+            $(this).parent(".i-checks").eq(0).toggleClass("fast");
+        })
+    })
+    </script>
+
+
+
+</body>
+
+</html>

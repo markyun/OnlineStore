@@ -1,0 +1,81 @@
+[
+    {
+    "subsPlanId" : "12340",
+    "subsPlanName" : "single pre-paid",
+    "isBundleFlag" : "false",
+    "offerGroupDtoList" : [
+        {"offerDtoList" : 
+            [
+                {
+                    "offerName" : "Data Bundle",
+                    "offerType" : "20G",
+                    "saleListPrice" : "Free"
+                }
+            ]
+        }
+    ],
+    "bundleUnitDtoList" : []
+    },
+    
+    {
+    "subsPlanId" : "12341",
+    "subsPlanName" : "single post-paid",
+    "isBundleFlag" : "false",
+    "offerGroupDtoList" : 
+        [{"offerDtoList" : 
+            [
+                {
+                    "offerName" : "Data Bundle",
+                    "offerType" : "20G",
+                    "saleListPrice" : "Free"
+                }
+            ]
+        }]
+    ,
+    "bundleUnitDtoList" : []
+    },
+    
+    {
+    "subsPlanId" : "12342",
+    "subsPlanName" : "family",
+    "isBundleFlag" : "true",
+    "offerGroupDtoList" : [
+        {"offerDtoList" : 
+            [
+                {
+                    "offerName" : "Data Bundle",
+                    "offerType" : "20G",
+                    "saleListPrice" : "Free"
+                }
+            ]
+        }
+    ],
+    "bundleUnitDtoList" : 
+        [{
+            "upperLimit" : "6",
+            "lowerLimit" : "2"
+        }]
+    },
+    
+    {
+    "subsPlanId" : "12343",
+    "subsPlanName" : "business",
+    "isBundleFlag" : "true",
+    "offerGroupDtoList" : [
+        {"offerDtoList" : 
+            [
+                {
+                    "offerName" : "Data Bundle",
+                    "offerType" : "10G",
+                    "saleListPrice" : "Free"
+                }
+            ]
+        }
+    ],
+    "bundleUnitDtoList" : 
+        [{
+            "upperLimit" : "1000",
+            "lowerLimit" : "200"
+        }]
+    }
+]

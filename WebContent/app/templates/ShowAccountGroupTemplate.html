@@ -1,0 +1,57 @@
+<%_.each(orderItemdtoList, function(orderItemdto, index, orderItemdtoList){ %>
+	<%if(index != 0){%>
+	<tr class="item">
+		<td class="choose-ac">
+		<label class="checkbox m-n i-checks fast">
+		  <input type="checkbox">
+		  <i class="i-checks-i group <%=index%>" data-group="<%=index%>"> <s class="i-checksd"></s> </i>
+		</label>
+		</td>
+		<td class="accNbr-group"> 
+			<span class="group-d-list off <%=index%>" data-group="<%=index%>">Group<%=index%> <i></i></span>  
+		</td>
+		<td class="selectAccount">
+			<select class="choose-number selectForGroup <%=index%>" data-group="<%=index%>">
+				<%_.each(acctList, function(acctDto){ %>
+					<option value="<%=acctDto.acctId%>"><%=acctDto.acctNbr%></option>
+				<%})%>
+			</select>
+		</td>
+	</tr>
+	<%_.each(orderItemdto.resourceDtoList, function(resource){ %>
+	<tr class="group-item <%=index%>" style="overflow: hidden; display: none;">
+		<td class='choose-ac'>
+		<label class="checkbox m-n i-checks fast <%=index%>">
+			<input type="checkbox">
+			<i class="i-checks-i one <%=index%>" data-group="<%=index%>"> <s class="i-checksd"></s> </i> 
+		</label>
+		</td>
+		<td class="accNbr <%=index%>" data-group="<%=index%>"><%=resource.accNbr%></td>
+		<td class="selectAccount">
+			<select class="choose-number acctId <%=index%>" data-group="<%=index%>" disabled="disabled">
+			<%_.each(acctList, function(acctDto){ %>
+				<option value="<%=acctDto.acctId%>"><%=acctDto.acctNbr%></option>
+			<%})%>
+			</select>
+		</td>
+	</tr>
+	<%})%>
+	<%} else {%>
+	<tr class="group-item <%=index%>">
+		<td class='choose-ac'>
+		<label class="checkbox m-n i-checks">
+			<input type="checkbox">
+			<i class="i-checks-i one <%=index%>" data-group="<%=index%>"> <s class="i-checksd"></s> </i> 
+		</label>
+		</td>
+		<td class="accNbr <%=index%>" data-group="<%=index%>"><%=subsPlanName%></td>
+		<td class="selectAccount">
+			<select class="choose-number acctId <%=index%>" data-group="<%=index%>">
+			<%_.each(acctList, function(acctDto){ %>
+				<option value="<%=acctDto.acctId%>"><%=acctDto.acctNbr%></option>
+			<%})%>
+			</select>
+		</td>
+	</tr>
+	<%}%>
+<%})%>

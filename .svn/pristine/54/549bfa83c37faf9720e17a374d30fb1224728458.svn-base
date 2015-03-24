@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Choose Mandatory Product",
+    "method": "chooseMandatoryProduct"
+  },
+  {
+    "name": "Choose Optional Product",
+    "method": "chooseOptionalProduct"
+  },
+  {
+    "name": "Choose Handset",
+    "method": "chooseHandset"
+  }
+]

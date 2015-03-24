@@ -1,0 +1,64 @@
+[
+	{
+	"brand" :[
+	{
+	"brandInfo" : "APPLE"
+	},
+	{
+	"brandInfo" : "ZTE"
+	},
+	{
+	"brandInfo" : "SAMSUNG"
+	},
+	{
+	"brandInfo" : "NOKIA"
+	},
+	{
+	"brandInfo" : "HUWEI"
+	},
+	{
+	"brandInfo" : "HTC"
+	}
+	],
+	"color" :[
+	{
+	"colorInfo" : "White"
+	},
+	{
+	"colorInfo" : "Black"
+	},
+	{
+	"colorInfo" : "Gold"
+	},
+	{
+	"colorInfo" : "Red"
+	},
+	{
+	"colorInfo" : "Blue"
+	},
+	{
+	"colorInfo" : "Pink"
+	},
+	{
+	"colorInfo" : "Yellow"
+	}
+	],
+	"camera" : [
+	{
+	"cameraInfo" : "3.0"
+	},
+	{
+	"cameraInfo" : "5.0"
+	},
+	{
+	"cameraInfo" : "8.0"
+	},
+	{
+	"cameraInfo" : "10"
+	},
+	{
+	"cameraInfo" : "12"
+	}
+	]  
+	}
+]

@@ -1,0 +1,10 @@
+<%_.each(types,function(type){%>
+<div class="cabin-section">
+	<a class="text-cabin active">
+		<div class="cabin-header"><%=type.name%></div>
+		<div class="cabin-content">
+			<div class="highlight"><%=type.container%></div>
+			<%=type.description%>
+		</div> </a>
+</div>
+<% }) %>

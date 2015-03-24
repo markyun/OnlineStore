@@ -1,0 +1,18 @@
+<div class="row mand_choose">you have to choose all</div>
+<div class="row offerGroup" data-tempindex="<%=tempIndex %> ">
+	<% _.each(offerDtoList, function(offerDto, index, offerDtoList){ %>
+	<div class="col-sm-3 col-md-3">
+		<div
+			class="panel panel-default panel-bundle manda-all-option <%=tempIndex%> active "
+			data-offer-id="<%= offerDto.offerId %>"
+			data-eff-type="<%=offerDto.effType%>"
+			data-tempindex="<%=tempIndex%>">
+			<div class="panel-heading"><a class="head_a"><%= offerDto.offerName %></a></div>
+			<div class="panel-body">
+				<!-- 		    <h2 class="h"><%= offerDto.offerGroupType %></h2> -->
+				<b class="b"><%= offerDto.comments %></b>
+			</div>
+		</div>
+	</div>
+	<% }) %>
+</div>

@@ -1,0 +1,47 @@
+<div class="col-sm-12 col-md-12 step-header">
+	<span class="step-info">STEP <b>6 </b> OF <b>7</b></span>
+	<span class="step-detail">PLEASE CHOOSE ACCOUNT</span>
+</div>
+<div class="panel-body regist_bg">
+	<p class="order_txt">
+		Please configure account for each subscriber and bundle. You can also
+		click to <a class="a_choose" style="cursor: pointer" disabled="true">create new account</a>
+	</p>
+	<div class="row js-wrap">
+		<div class="col-md-12">
+			<div class="subscriber choose-account">
+				<table class="table table-striped m-b-none">
+					<tbody>
+						<tr>
+							<th class='choose-ac '>
+								<label class="checkbox m-n i-checks">
+									<input type="checkbox">
+									<i class="i-checks-i all"> <s class="i-checksd"></s></i>
+								</label>
+							</th>
+							<th>batch add subscriber for one account</th>
+							<th>
+								<select class="choose-number selectForAll">
+									<%_.each(acctList, function(acctDto){ %>
+									<option value="<%=acctDto.acctId%>"><%=acctDto.acctNbr%></option>
+									<%})%>
+								</select>
+							</th>
+						</tr>
+						<tr class="continue">
+							<td colspan=3>
+								<span>
+									<a href="javascript:void 0" class="b_choose">Continue...</a>
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row step-footer">
+	<a class="btn btn-step" href="javascript: history.back()">Prev</a>
+	<a class="btn btn-step confirm-order" href="javascript:void 0" disabled="true">Submit</a>
+</div>

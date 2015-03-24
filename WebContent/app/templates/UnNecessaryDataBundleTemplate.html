@@ -1,0 +1,13 @@
+<% _.each(unNecessaryList, function (offerDto){ %>
+<div class="col-md-3">
+	<div class="panel panel-default panel-unbundle"
+		data-offer-groupId="<%= offerDto.offerId %>"
+		data-eff-type="<%=offerDto.effType%>"
+		<div class="panel-heading"><a class="head_a"><%= offerDto.offerName %></a></div>
+		<div class="panel-body">
+			<!-- 		    <h2 class="h"><%= offerDto.offerGroupType %></h2> -->
+			<b class="b"><%= offerDto.comments %></b>
+		</div>
+	</div>
+</div>
+<% }) %>

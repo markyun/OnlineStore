@@ -1,0 +1,38 @@
+<div class="modal-header" align="center">
+	<p3>CREATE NEW ACCOUNT</p3>
+</div>
+<div class="modal-body account">
+	<form class="createAccount" method="post" autocomplete="off">
+		<div class="col-sm-12 col-md-12">
+			<span class="error_msg adress"></span> <input name="adress"
+				class="form-control" id="adress" placeholder="Address *">
+		</div>
+		<div class="col-sm-12 col-md-12">
+			<span class="error_msg zip"></span> <input name="zipCode"
+				class="form-control" id="zipCode_acct" placeholder="ZIP Code *">
+		</div>
+		<div class="col-sm-12 col-md-12">
+			<span class="error_msg email"></span> <input name="email"
+				class="form-control" id="email" placeholder="Email *"
+				data-rule="required;email" data-msg-required="Email is required">
+		</div>
+		<div class="col-sm-12 col-md-12">
+			<span class="error_msg deliver"></span> <select class="form-control"
+				id="deliverMethod" data-rule="required"
+				data-msg-required="Deliver Method is required">
+				<option value="">How would you like to receive your
+					invoice?</option>
+				<option value="A">Hardcopy Bill</option>
+				<option value="B">Electronic Invoice</option>
+			</select>
+		</div>
+		<br>
+		<br>
+		<div class="step-footer">
+			<a class="btn btn-step js-cancel-account" href="javascript: void 0">Cancel</a>
+			<a class="btn btn-step js-submit-account" href="javascript: void 0">Submit</a>
+		</div>
+	</form>
+</div>
+
+

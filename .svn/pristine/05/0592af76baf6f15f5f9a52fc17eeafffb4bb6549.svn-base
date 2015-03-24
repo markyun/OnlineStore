@@ -1,0 +1,494 @@
+ <div class="col-sm-12 col-md-12 step-header">
+            <span class="step-info">ORDER LIST</span>
+            <span class="step-detail"></span>
+        </div>
+        <div class="panel-body">
+            <div class="row order_list_bg">
+                <div class="col-md-12">
+                    <div>
+                        <img class="order_list_icon" src="img/new-collection.png" alt="new-Collection">
+                        <p>New Collection</p>
+                    </div>
+                    <ul>
+                        <li class="list-o-name">
+                            <span>Oder Number</span><span>0027006511</span>
+                        </li>
+                        <li class="list-o-name">
+                            <span>Plan</span><span>Freshness family plan</span>
+                        </li>
+                        <li class="list-o-name">
+                            <span>Oder status</span><span>Going On</span>
+                        </li>
+                    </ul>
+                    <hr class="orderhr">
+                    <ul>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon1"></i>
+                            <span>
+                                Choose the moblie lines
+                            </span>
+                        </li>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon2"></i>
+                            <span>
+                                Choose your plan and options
+                            </span>
+                        </li>
+                        <li class="list_o2 ative">
+                            <i class="list_o2_icon icon3"></i>
+                            <span>
+                              Fill in your details
+                            </span>
+                        </li>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon4"></i>
+                            <span>
+                               Choose Accunt
+                            </span>
+                        </li>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon5"></i>
+
+                            <span>
+                               Confirm Order
+                            </span>
+                        </li>
+                        <li class="list_o2 grayed">
+                            <i class="list_o2_icon icon6"></i>
+                            <span>
+                               Payment
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="row continue">
+                        <a>Continue</a>
+                    </div>
+                </div>
+                <div class="col-md-12 mb20">
+                    <div>
+                        <img class="order_list_icon" src="img/change-plan.png" alt="new-Collection">
+                        <p>Change Plan</p>
+                    </div>
+                    <ul>
+                        <li class="list-o-name">
+                            <span>Oder Number</span><span>0027006511</span>
+                        </li>
+                        <li class="list-o-name">
+                            <span>Plan</span><span>Freshness family plan</span>
+                        </li>
+                        <li class="list-o-name">
+                            <span>Oder status</span><span>Going On</span>
+                        </li>
+                    </ul>
+                       <hr class="orderhr">
+                    <ul>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon1"></i>
+                            <span>
+                                Choose the moblie lines
+                            </span>
+                        </li>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon2"></i>
+                            <span>
+                                Choose your plan and options
+                            </span>
+                        </li>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon3"></i>
+                            <span>
+                              Fill in your details
+                            </span>
+                        </li>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon4"></i>
+                            <span>
+                               Choose Accunt
+                            </span>
+                        </li>
+                        <li class="list_o2">
+                            <i class="list_o2_icon icon5"></i>
+
+                            <span>
+                               Confirm Order
+                            </span>
+                        </li>
+                        <li class="list_o2 grayed">
+                            <i class="list_o2_icon icon6"></i>
+                            <span>
+                               Payment
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="row continue">
+                        <a>Continue</a>
+                    </div>
+                </div>
+                <!-- 第3个div -->
+                <div class="col-md-12 mb20" id="detail-p">
+                   <div>
+                        <img class="order_list_icon" src="img/new-collection.png" alt="new-Collection">
+                        <p>New Collection</p>
+                    </div>
+                  <div class="subscriber eshop">
+                      <h5>Package</h5>
+                      <table class="table table-striped m-b-none">
+                          <thead>
+                              <tr>
+                                  <th>Plan</th>
+                                  <th>Product</th>
+                                  <th>One-off Charge</th>
+                                  <th>Recurring Charge </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr class="tr1">
+                                  <td rowspan="2">
+                                      <div class="subs_td1">
+                                          Freshness family
+                                      </div>
+                                  </td>
+                                  <td valign="bottom">
+                                      <span class="subs_td2">Data 10GB</span>
+                                </i>
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p class="p_title">
+                                          <span>Pre-tax Price</span>
+                                          <span>Tax</span>
+                                          <span>Price including Tax</span>
+                                      </p>
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+
+
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p class="p_title">
+                                          <span>Pre-tax Price</span>
+                                          <span>Tax</span>
+                                          <span>Price including Tax</span>
+                                      </p>
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+
+                                  </td>
+                              </tr>
+
+                              <tr class="tr2">
+                                  <td colspan=2 class="subs_td4">
+                                      <p>
+                                          <span class="un-pirce">Unit-pirce</span>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+
+
+                  <div class="subscriber eshop">
+                      <h5>Subscriber</h5>
+                      <table class="table table-striped m-b-none">
+                          <thead>
+                              <tr>
+                                  <th>Plan</th>
+                                  <th>Product</th>
+                                  <th>One-off Charge</th>
+                                  <th>Recurring Charge </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr class="tr1">
+                                  <td rowspan="2">
+                                      <div class="subs_td1">
+                                          Freshness family
+                                      </div>
+                                  </td>
+                                  <td valign="bottom">
+                                      <span class="subs_td2">Data 10GB</span>
+                                </i>
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p class="p_title">
+                                          <span>Pre-tax Price</span>
+                                          <span>Tax</span>
+                                          <span>Price including Tax</span>
+                                      </p>
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+
+
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p class="p_title">
+                                          <span>Pre-tax Price</span>
+                                          <span>Tax</span>
+                                          <span>Price including Tax</span>
+                                      </p>
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+
+                                  </td>
+                              </tr>
+                              <tr class="tr2">
+                                  <td colspan=2 class="subs_td4">
+                                      <p>
+                                          <span class="un-pirce">Unit-pirce</span>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+                                  </td>
+                              </tr>
+
+
+                              <!-- 第2个表格 -->
+
+                              <tr class="tr1">
+                                  <td rowspan="2">
+                                      <div class="subs_td1">
+                                          Freshness family
+                                      </div>
+                                  </td>
+                                  <td valign="bottom">
+                                      <span class="subs_td2">Data 10GB</span>
+                                </i>
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p class="p_title">
+                                          <span>Pre-tax Price</span>
+                                          <span>Tax</span>
+                                          <span>Price including Tax</span>
+                                      </p>
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+
+
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p class="p_title">
+                                          <span>Pre-tax Price</span>
+                                          <span>Tax</span>
+                                          <span>Price including Tax</span>
+                                      </p>
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+
+                                  </td>
+                              </tr>
+
+                              <tr class="tr2">
+                                  <td colspan=2 class="subs_td4">
+                                      <p>
+                                          <span class="un-pirce">Unit-pirce</span>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+                                  </td>
+                              </tr>
+
+
+                              <!-- 第3个表格 -->
+
+
+                              <tr class="tr1">
+                                  <td rowspan="2">
+                                      <div class="subs_td1">
+                                          Freshness family
+                                      </div>
+                                  </td>
+                                  <td valign="bottom">
+                                      <span class="subs_td2">Data 10GB</span>
+                                </i>
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p class="p_title">
+                                          <span>Pre-tax Price</span>
+                                          <span>Tax</span>
+                                          <span>Price including Tax</span>
+                                      </p>
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+
+
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p class="p_title">
+                                          <span>Pre-tax Price</span>
+                                          <span>Tax</span>
+                                          <span>Price including Tax</span>
+                                      </p>
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+
+                                  </td>
+                              </tr>
+
+                              <tr class="tr2">
+                                  <td colspan=2 class="subs_td4">
+                                      <p>
+                                          <span class="un-pirce">Unit-pirce</span>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+                                  </td>
+                                  <td class="subs_td3">
+                                      <p>
+                                          <span> € 509</span>
+                                          <span> € 4.00</span>
+                                          <span> € 0.40</span>
+                                      </p>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+
+                  <div class="row total ">
+
+                      <div class="col-md-12">
+                          <div class="col-md-4">
+                              <p>
+                                  This is a price estimate of your One-off Charge
+                              </p>
+                              <ul>
+                                  <li>
+                                      <span> Freshness family Plan</span>
+                                      <span class="cri_price">  € 509</span>
+                                  </li>
+                                  <li>
+                                      <span>Group1</span>
+                                      <span>
+                                  35*
+                                <span class="cri_price">  € 11.00</span>
+                                      <span class="cri_price"> = €309</span>
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>Group2</span>
+                                      <span>
+                                 20*
+                                <span class="cri_price">  € 11.00</span>
+                                      <span class="cri_price"> = €309</span>
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>Group3</span>
+                                      <span>
+                                 40*
+                                <span class="cri_price">  € 221.00</span>
+                                      <span class="cri_price"> = €309</span>
+                                      </span>
+                                  </li>
+                              </ul>
+
+                              <div class="col-md-11" style="padding-left: 0;padding-right: 29px;">
+                                  <hr>
+                                  <p class="order-list-total"><span>Total</span><span class="cri_price" style="float: right;">  € 509</span </p>
+                         </div>
+                        </div>
+                         <div class="col-md-8" style="text-align: right;">
+                           <p>
+                            This is a price estimate of your Recurring Charge
+                          </p>
+
+                          <ul>
+                            <li>
+                              <span> Freshness family Plan</span>
+                                      <span class="cri_price">  € 509</span>
+                                      </li>
+                                      <li>
+                                          <span>Group1</span>
+                                          <span>
+                                35*
+                                <span class="cri_price">  € 11.00</span>
+                                          <span class="cri_price"> = €309</span>
+                                          </span>
+                                      </li>
+                                      <li>
+                                          <span>Group2</span>
+                                          <span>
+                                20*
+                                <span class="cri_price">  € 11.00</span>
+                                          <span class="cri_price"> = €309</span>
+                                          </span>
+                                      </li>
+                                      <li>
+                                          <span>Group3</span>
+                                          <span>
+                                40*
+                                <span class="cri_price">  € 221.00</span>
+                                          <span class="cri_price"> = €309</span>
+                                          </span>
+                                      </li>
+                                      </ul>
+
+                            <div class="col-md-6 order-list-t2">
+                                          <hr>
+                                          <p  class="order-list-total">
+                                              <span style="float: left;">Total</span>
+                                              <span class="total_price">€ 509</span
+                                </p>
+                           </div>
+
+                        </div>
+                    </div>
+                 </div>
+                   <div class=" row continue">
+                        <a class="detail-p">Hide Detail</a>
+                    </div>
+               </div>
+            </div>
+        </div>

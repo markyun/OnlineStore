@@ -1,0 +1,39 @@
+<div class="row step-header">
+    <span class="step-info">STEP <b>1</b> OF <b>7</b></span>
+    <span class="step-detail">Select who you are</span>
+</div>
+
+<div class="row">
+    <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+            <img src="img/single.png" alt="Single">
+            <div class="caption">
+                <p>1 people</p>
+                <h3>Single</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+            <img src="img/family.png" alt="Family">
+            <div class="caption">
+                <p>2 - 6 people</p>
+                <h3>Family</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+            <img src="img/business.png" alt="Business">
+            <div class="caption">
+                <p>200+ people</p>
+                <h3>Business</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row step-footer">
+    <a class="btn btn-step" href="javascript: history.back()">Prev</a>
+    <a class="btn btn-step" href="javascript: void 0">Save</a>
+    <a class="btn btn-step js-next" href="#choose/offer" disabled>Next</a>
+</div>

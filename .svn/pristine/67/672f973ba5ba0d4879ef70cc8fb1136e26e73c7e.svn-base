@@ -1,0 +1,40 @@
+<div class="container p_detail">
+	<div class="row">
+		<div class="col-md-3 ">
+			<div class="phone_img">
+				<img src="img/color_gold_2x.jpg" alt="phone">
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="phone_detail">
+				<h3><%=phone.goodsProdSpec.modelName%></h3>
+				<p class="pay_ff">
+					<span> Pay today</span>
+				</p>
+				<p class="pay_ff">
+					<span class="phone-price">€<%=phone.saleListPrice/10000%></span>
+				</p>
+				<div class=" infor-phone">
+					<%if(select === phone.goodsProdSpec.modelId){%>
+					<div class="cabin-btn phone-btn js-choose select active"
+						data-model-id="<%=phone.goodsProdSpec.modelId%>">✔</div>
+					<%}else{%>
+					<div class="cabin-btn phone-btn js-choose select"
+						data-model-id="<%=phone.goodsProdSpec.modelId%>">Choose</div>
+					<%}%>
+					<div class="cabin-btn phone-btn grey js-back">Back</div>
+					<p class="pay_ff">Sold in these store</p>
+					<ul class="store_addrs">
+						<%_.each(address,function(detail){%>
+						<li>
+							<ul>
+								<li><%=detail.shopName%></li>
+								<li>Stock:<%if(detail.quantity){%><%=detail.quantity%><%}else{%>0<%}%></li>
+							</ul>
+						</li><%})%>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+<div class="col-md-12">
+	<div class="container js-one"></div>
+	<div class="container js-multiply"></div>
+	<div class="container js-all"></div>
+</div>

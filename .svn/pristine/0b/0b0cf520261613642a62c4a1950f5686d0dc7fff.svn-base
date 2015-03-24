@@ -1,0 +1,38 @@
+<div class="group-section">
+	<div class="group-fbox">
+		<div class="group-box group-chice">
+				<div class="group-title">
+					<input type="text" class="group-input groupName" id="group-name" value="Group 1">
+				</div>
+				<div class="group-content">
+					<input type="text" class="group-input groupNum" value="10">
+				</div>
+		</div>
+	</div>
+	<div class="group-fbox">
+		<div class="group-box group-chice">
+			<div class="group-title">
+				<input type="text" class="group-input groupName" id="group-name" value="Group 2">
+			</div>
+			<div class="group-content">
+				<input type="text" class="group-input groupNum" value="10">
+			</div>
+		</div>
+	</div>
+	<div class="group-box empty add">Add Group</div>
+<!-- 	<div class="group-box empty delete">Delete Group</div> -->
+</div>
+<script>
+$(function(){
+	$("body").delegate('.group-fbox', 'hover', function(event) {
+ 		$(this).prepend('<span class="close-group ">×</span>')
+	});
+	$("body").delegate('.group-fbox', 'mouseleave', function(event) {
+ 		$(this).find('.close-group').remove();
+	});
+	$("body").delegate('.close-group', 'click', function(event) {
+ 		$(this).parents('.group-fbox').remove();
+	});
+
+});
+</script>

@@ -1,0 +1,228 @@
+<div class="col-sm-12 col-md-12 step-header">
+	<span class="step-info">STEP <b>4</b> OF <b>6</b> </span> <span
+		class="step-detail">PLEASE CHECK YOUR ORDER</span>
+</div>
+<div class="panel-body regist_bg">
+	<p class="order_txt">Below you will find a summary of your order.
+		You can modify you order in the bill.</p>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="oder_detail">
+				<p>
+					<span>User Type</span> <span> <%=userType%></span>
+				</p>
+			</div>
+
+			<%if(bundleFeeList!=null) { %>
+			<div class="subscriber eshop">
+				<h5>Package</h5>
+				<table class="table table-striped m-b-none">
+					<thead>
+						<tr>
+							<th>Plan</th>
+							<th>Product</th>
+							<th>One-off Charge</th>
+							<th>Recurring Charge</th>
+						</tr>
+					</thead>
+					<tbody>
+
+
+
+						<tr class="tr1">
+							<td rowspan="2">
+								<div class="subs_td1"><%=subsPlanName%></div>
+							</td>
+
+							<td valign="bottom">
+								<%_.each(bundleFeeList,function(bundleFeeDto,index) {%> <span
+								class="subs_td2"><%=bundleFeeDto.feeItemName%></span> <%})%> <i
+								class="update_subsc modifyBundle"> </i></td>
+
+							<td class="subs_td3">
+
+								<p class="p_title">
+									<span>Pre-tax Price (€)</span> <span>Tax (€)</span> <span>Price
+										including Tax (€)</span>
+								</p> <%_.each(bundleFeeList,function(bundleFeeDto,index) {%>
+								<p>
+									<span><%=((bundleFeeDto.otc-bundleFeeDto.otcVat)/10000).toFixed(2)%></span>
+									<span><%=(bundleFeeDto.otcVat/10000).toFixed(2)%></span> <span><%=(bundleFeeDto.otc/10000).toFixed(2)%></span>
+								</p> <%})%></td>
+							<td class="subs_td3">
+								<p class="p_title">
+									<span>Pre-tax Price (€)</span> <span>Tax (€)</span> <span>Price
+										including Tax (€)</span>
+								</p> <%_.each(bundleFeeList,function(bundleFeeDto,index) {%>
+								<p>
+									<span><%=((bundleFeeDto.mrc-bundleFeeDto.mrcVat)/10000).toFixed(2)%></span>
+									<span><%=(bundleFeeDto.mrcVat/10000).toFixed(2)%></span> <span><%=(bundleFeeDto.mrc/10000).toFixed(2)%></span>
+
+								</p> <%})%></td>
+
+						</tr>
+
+						<tr class="tr2">
+
+							<td colspan=2 class="subs_td4">
+								<p>
+									<span class="un-pirce">Unit-pirce</span> <span>
+										<%=(bundleFeeList.otcBundlePriceTotal-bundleFeeList.otcVatBundlePriceTotal).toFixed(2)%></span>
+									<span><%=(bundleFeeList.otcVatBundlePriceTotal).toFixed(2)%></span>
+									<span><%=(bundleFeeList.otcBundlePriceTotal).toFixed(2)%></span>
+								</p></td>
+							<td class="subs_td3">
+								<p>
+									<span><%=(bundleFeeList.mrcBundlePriceTotal-bundleFeeList.mrcVatBundlePriceTotal).toFixed(2)%></span>
+									<span><%=(bundleFeeList.mrcVatBundlePriceTotal).toFixed(2)%></span>
+									<span><%=(bundleFeeList.mrcBundlePriceTotal).toFixed(2)%></span>
+								</p></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<%}%>
+
+			<div class="subscriber eshop">
+				<h5>Subscriber</h5>
+				<table class="table table-striped m-b-none">
+					<thead>
+						<tr>
+							<th>Number</th>
+							<th>Product</th>
+							<th>One-off Charge</th>
+							<th>Recurring Charge</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%_.each(orderFeeList,function(orderFee,groupIndex,orderFeeList){
+						%>
+
+						<tr class="tr1">
+							<td rowspan="2"><%if (userType ==="business") {%>
+								<div class="subs_td1">
+									<%=orderFee.accNbrList.length%> number in group
+									<%=groupIndex+1%>
+									<li class="js-showdetail" data-group-index="<%=groupIndex%>">View
+										all</li>
+								</div> <% }else{ %>
+								<div class="subs_td1"><%=orderFee.accNbrList.accNbr%></div>
+								<%}%></td>
+
+							<td valign="bottom">
+
+								<%_.each(orderFee.feeDetailList,function(feeDetailDto,index) {%>
+
+								<span class="subs_td2"><%=feeDetailDto.feeItemName%></span>
+								<%})%> <i class="update_subsc modify"
+								data-index="<%=(groupIndex)%>" data-index-step="2"> </i></td>
+							<td class="subs_td3">
+								<p class="p_title">
+									<span>Pre-tax Price (€)</span> <span>Tax (€)</span> <span>Price
+										including Tax (€)</span>
+								</p> <%_.each(orderFee.feeDetailList,function(feeDetailDto){%>
+								<p>
+									<span><%=((feeDetailDto.otc-feeDetailDto.otcVat)/10000).toFixed(2)%></span>
+									<span><%=(feeDetailDto.otcVat/10000).toFixed(2)%></span> <span><%=(feeDetailDto.otc/10000).toFixed(2)%></span>
+								</p> <%})%></td>
+							<td class="subs_td3">
+								<p class="p_title">
+									<span>Pre-tax Price (€)</span> <span>Tax (€)</span> <span>Price
+										including Tax (€)</span>
+								</p> <%_.each(orderFee.feeDetailList,function(feeDetailDto){%>
+								<p>
+									<span><%=((feeDetailDto.mrc-feeDetailDto.mrcVat)/10000).toFixed(2)%></span>
+									<span><%=(feeDetailDto.mrcVat/10000).toFixed(2)%></span> <span><%=(feeDetailDto.mrc/10000).toFixed(2)%></span>
+								</p> <%})%></td>
+						</tr>
+						<tr class="tr2">
+							<td colspan=2 class="subs_td4">
+								<p>
+									<span class="un-pirce">Unit-pirce</span> <span><%=(orderFee.otcPriceTotal-orderFee.otcVasPriceTotal).toFixed(2)%></span>
+									<span><%=(orderFee.otcVasPriceTotal).toFixed(2)%></span> <span><%=(orderFee.otcPriceTotal).toFixed(2)%></span>
+								</p></td>
+							<td class="subs_td3">
+								<p>
+									<span><%=(orderFee.mrcPriceTotal-orderFee.mrcVasPriceTotal).toFixed(2)%></span>
+									<span><%=(orderFee.mrcVasPriceTotal).toFixed(2)%></span> <span><%=(orderFee.mrcPriceTotal).toFixed(2)%></span>
+								</p>
+							</td>
+						</tr>
+
+						<%})%>
+
+					</tbody>
+				</table>
+			</div>
+
+			<div class="row total ">
+				<div class="col-md-12">
+					<div class="col-md-4">
+						<p>This is a price estimate of your One-off Charge</p>
+						<ul>
+							<li><span><%=userType%></span> <%if (bundleFeeList!=null)
+								{%> <span class="cri_price"><%=(bundleFeeList.otcBundlePriceTotal).toFixed(2)%>
+							</span> <%}%></li>
+
+							<%_.each(orderFeeList,function(orderFee,groupIndex,orderFeeList){
+							%> <% if (userType ==="business") {%>
+							<li><span>Group <%=groupIndex+1%></span> <span> <span
+									class="cri_price"><%=orderFee.accNbrList.length%> * €
+										<%=(orderFee.otcPriceTotal).toFixed(2)%></span> <span
+									class="cri_price"> = €
+										<%=(orderFee.otcTotal).toFixed(2)%></span> </span></li> <%}else{%>
+							<li><span><%=orderFee.accNbrList.accNbr%></span> <span>
+									<span class="cri_price"> €
+										<%=(orderFee.otcTotal).toFixed(2)%></span> </span></li> <%}})%>
+						</ul>
+
+						<div class="col-md-11"
+							style="padding-left: 0; padding-right: 29px;">
+							<hr>
+							<p class="order-list-total">
+								<span>Total</span> <span class="cri_price" style="float: right;">€
+									<%=(otcAllTotal).toFixed(2)%></span>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-8" style="text-align: right;">
+						<p>This is a price estimate of your Recurring Charge</p>
+						<ul>
+							<li><span><%=userType%></span> <%if (bundleFeeList!=null)
+								{%> <span class="cri_price">€
+									<%=(bundleFeeList.mrcBundlePriceTotal).toFixed(2)%></span> <%}%></li>
+
+							<%_.each(orderFeeList,function(orderFee,groupIndex,orderFeeList){
+							%> <% if (userType === "business") {%>
+							<li><span>Group <%=groupIndex+1%></span> <span> <span
+									class="cri_price"><%=orderFee.accNbrList.length%> * €
+										<%=(orderFee.mrcPriceTotal).toFixed(2)%></span> <span
+									class="cri_price"> = €
+										<%=(orderFee.mrcTotal).toFixed(2)%></span> </span></li> <%}else{%>
+							<li><span><%=orderFee.accNbrList.accNbr%></span> <span>
+									<span class="cri_price">€
+										<%=(orderFee.mrcPriceTotal).toFixed(2)%></span> </span></li> <%}})%>
+						</ul>
+						<div class="col-md-6 order-list-t2">
+							<hr>
+							<p class="order-list-total">
+								<span style="float: left;">Total</span> €
+								<%=(mrcAllTotal).toFixed(2)%>
+							</p>
+						</div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row step-footer">
+		<a class="btn btn-step js-prev">Prev</a> <a
+			class="btn btn-step js-save" href="javascript: void 0">Save</a><a
+			class="btn btn-step js-confirm">Confirm Order</a>
+	</div>

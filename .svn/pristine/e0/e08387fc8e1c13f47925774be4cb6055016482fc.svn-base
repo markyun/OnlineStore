@@ -1,0 +1,76 @@
+<div class="col-sm-12 col-md-12 step-header">
+	<span class="step-info">STEP <b>5</b> OF <b>6</b> </span> <span
+		class="step-detail">PAYMENT</span>
+</div>
+<div class="panel-body">
+	<div class="row payment">
+		<div class="col-md-6">
+			<form class="pay-info" method="post" autocomplete="off">
+				<fieldset>
+					<p class="payment_title">Select your payment method</p>
+					<div class="fow col-md-12">
+						<select class="form-control send_type" id="send_type">
+							<%_.each(payTypeList,function(payTypeItem){%>
+							<option value="<%=payTypeItem.id%>"><%=payTypeItem.name%></option>
+							<%})%>
+						</select>
+					</div>
+					<div class="fow col-md-12">
+						<select class="form-control send_type" id="pay_type">
+							<%_.each(cardTypeList,function(cardTypeItem){%>
+							<option value="<%=cardTypeItem.id%>"><%=cardTypeItem.name%></option>
+							<%})%>
+						</select>
+					</div>
+					<div class="fow col-md-12">
+						<span class="error_msg card"></span> <input class="form-control"
+							type="text" id="cardNumber" placeholder="Card Number">
+					</div>
+					<div class="fow col-md-12">
+						<div class="select_date">
+							<div class="form-group">
+								<span class="error_msg date"></span> <input type="text"
+									name="Expirationdate" id="expirationdate" class="expir_date"
+									value="" placeholder="Expiration date">
+							</div>
+						</div>
+					</div>
+					<div class="fow col-md-12">
+						<span class="error_msg tips"></span>
+						<div class="tips2" id="tips22"></div>
+						<input class="form-control CVV2tips" type="text" id="CVV2"
+							placeholder="CVV2">
+					</div>
+					<div class="fow col-md-12">
+						<span class="error_msg name"></span> <input class="form-control"
+							type="text" id="nameOnCard" placeholder="name on Card">
+					</div>
+
+				</fieldset>
+
+			</form>
+		</div>
+		<div class="col-md-6 pay_right">
+			<div class="pay_detail">
+				<p>Here is your bill</p>
+				<p>
+					<span>user Type</span> <span><%=userType%> </span>
+				</p>
+				<p>
+					<span>Package</span> <span><%=packag%></span>
+				</p>
+				<p>
+					<span>subscriber subtoatl </span> <span class="cri_price"> €
+						<%=total%></span>
+				</p>
+				<hr>
+				<span>Total:</span> <span class="cri_price"> € <%=total%></span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row step-footer">
+	<a class="btn btn-step" href="javascript: history.back()">Prev</a> <a
+		class="btn btn-step pay" href="javascript:void 0">Pay now</a>
+</div>
+

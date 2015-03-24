@@ -1,0 +1,26 @@
+<div class="col-sm-12 col-md-12">
+	<% _.each(subsPlanDtoList, function (subs){if(subs.subsPlanId
+	===subsPlanIdBundle){ %>
+	<div class="col-sm-3 col-md-3">
+		<div class="panel panel-default active"
+			data-subs-planid="<%= subs.subsPlanId %>">
+			<div class="panel-heading">
+				<a class="head_a"><%= subs.subsPlanName %></a>
+			</div>
+			<div class="panel-body"><%= subs.comments %></div>
+		</div>
+	</div>
+	<%}else{%>
+	<div class="col-sm-3 col-md-3">
+		<div class="panel panel-default"
+			data-subs-planid="<%= subs.subsPlanId %>">
+			<div class="panel-heading">
+				<a class="head_a"><%= subs.subsPlanName %></a>
+			</div>
+			<div class="panel-body"><%= subs.comments %></div>
+		</div>
+	</div>
+	<%} }) %>
+</div>
+
+

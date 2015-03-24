@@ -1,0 +1,34 @@
+{
+    "API_URL": "http://10.45.7.48:8090/cvbs/api/",
+    "cert_type" : [ {
+        "id" : 6,
+        "name" : "ID Card"
+    }, {
+        "id" : 61,
+        "name" : "Corporate ID"
+    } ],
+    "customer_type" : [ {
+        "cust_type" : "A",
+        "cust_type_name" : "Individual Customer"
+    }, {
+        "cust_type" : "B",
+        "cust_type_name" : "Partner Customer"
+    }, {
+        "cust_type" : "C",
+        "cust_type_name" : "Corporate Customer"
+    } ],
+    "payTypeList" : [ {
+        "id" : 1,
+        "name" : "Credit Card"
+    }, {
+        "id" : 2,
+        "name" : "Cash"
+    } ],
+    "cardTypeList" : [ {
+        "id" : 1,
+        "name" : "VISA"
+    }, {
+        "id" : 2,
+        "name" : "MasterCard"
+    } ]
+}

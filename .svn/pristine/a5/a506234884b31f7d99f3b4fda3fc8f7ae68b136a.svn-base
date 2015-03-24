@@ -1,0 +1,18 @@
+<%_.each(resourceList, function(resource,index,resourceList){ %>
+	<tr class="item">
+		<td class='choose-ac'>
+		<label class="checkbox m-n i-checks">
+			<input type="checkbox">
+			<i class="i-checks-i one" data-index="<%=start_index+index+1%>"> <s class="i-checksd"></s> </i> 
+		</label>
+		</td>
+		<td class="accNbr" data-index="<%=start_index+index+1%>"><%=resource.accNbr%></td>
+		<td class="selectAccount">
+			<select class="choose-number acctId" data-index="<%=start_index+index+1%>">
+			<%_.each(acctList, function(acctDto){ %>
+				<option value="<%=acctDto.acctId%>"><%=acctDto.acctNbr%></option>
+			<%})%>
+			</select>
+		</td>
+	</tr>
+<%})%>

@@ -1,0 +1,90 @@
+<!-- <div class="row step-header"> -->
+<!--     <span class="step-info">STEP <b>5</b> OF <b>7</b></span> -->
+<!--     <span class="step-detail">PLEASE FILL IN YOUR DETAILS</span> -->
+<!-- </div> -->
+
+<div class="modal-header">
+<!--       <p3>Sign In</p3> -->
+</div>
+<div class="modal-body">
+<!-- 	<div class="panel-body regist_bg"> -->
+    <p class="registered">Please fill in your personal information
+<!--         <a href="javascript:void(0)" class="login">Login</a> -->
+    </p>
+	<form class="register" method="post" autocomplete="off">
+        <div class="col-sm-12 col-md-12">
+	        <div class="col-sm-6 col-md-6">
+	        <span class="error_msg usertype"></span>
+	            <select class="form-control" id="user">
+	            	<option value="">Customer type*</option>
+					<% _.each(cust, function (cust_type){ %>
+						<option value="<%=cust_type.cust_type%>"><%=cust_type.cust_type_name%></option>
+					<%})%>
+				</select>
+	        </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<span class="error_msg first"></span>
+            <input name="firstName" class="form-control" id="firstName" placeholder="First Name *">
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<span class="error_msg last"></span>
+            <input name="lastName" class="form-control" id="lastName" placeholder="Last Name *">
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<div class="col-sm-6 col-md-6">
+        		<span class="error_msg certtype"></span>
+	        	<select  class="form-control"  id="cert_type">
+	        	<option value="">Certificate Type*</option>
+	            <% _.each(cert, function (cert_type){ %>
+					<option value="<%=cert_type.id%>"><%=cert_type.name%></option>
+				<%})%>
+				</select>
+			</div>
+			<div class="col-sm-6 col-md-6">
+				<span class="error_msg id"></span>
+				<input name="ID Number*" class="form-control" id="idNumber" placeholder="ID Number*">
+        	</div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<span class="error_msg birth"></span>
+             <input name="birthDate" class="form-control" id="birthDate" type="text" placeholder="Birthday *">
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<span class="error_msg adress"></span>
+            <input name="adress" class="form-control" id="adress" placeholder="Address *">
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<div class="col-sm-6 col-md-6">
+        		<span class="error_msg zip"></span>
+        		<input name="zipCode" class="form-control" id="zipCode" placeholder="ZIP Code *">
+        	</div>
+        	<div class="col-sm-6 col-md-6">
+        		<span class="error_msg city"></span>
+        		<input name="city" class="form-control" id="city" placeholder="City *">
+        	</div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<span class="error_msg daytime"></span>
+            <input name="daytimeContactNumber" class="form-control" id="daytimeContactNumber" placeholder="Daytime Contact Number *">
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<span class="error_msg email"></span>
+            <input name="email" class="form-control" id="email" placeholder="Email *">
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<span class="error_msg pass"></span>
+            <input name="password" class="form-control" id="password" type="password" placeholder="Password *">
+        </div>
+        <div class="col-sm-6 col-md-6">
+        	<span class="error_msg confirmPass"></span>
+            <input name="confirmPassword" class="form-control" id="confirmPassword" type="password" placeholder="Confirm Password *">
+        </div>
+
+		<div class="step-footer">
+		    <a class="btn btn-step register-cancel">Cancel</a>
+		    <a class="btn btn-step js-next register-submit" href="javascript: void 0">Submit</a>
+		</div>
+    </form>
+</div>
+

@@ -1,0 +1,38 @@
+<div class="con_Sort">
+<%if(brands.length>0){%>
+    <span class="manage-name mand_choose">Sort : </span> <span class="manage-value mand_choose">Default</span>
+    <div class="chosedbrand">
+        <table border="0">
+            <tr>
+                <td class="brand_chosed" style="display: none;">
+                    <span class="val"></span>
+                    <span class="glyphicon glyphicon-remove"></span>
+                </td>
+            </tr>
+        </table>
+        </div>
+    <div class="filter-btn pull-right mand_choose">
+        <div class="filter-btn pull-right mand_choose filter_choose" id="filter_choose"><i class="filter-icon"></i></div>
+        <span class="filter_title">Filter</span>
+        <div class="filter_choose_div">
+            <div>
+                <p>Brand</p>
+                <ul>
+                <%_.each(brands, function(brand){ %>
+					<li class="brand_li"><%=brand%></li>
+				<%})%>
+                </ul>
+            </div>
+            <hr>
+            <div class="filter_choose_btn">
+
+                <a class="btn btn-step js-cancel" href="javascript: void 0">Cancel</a>
+                <a class="btn btn-step  js-submit" href="javascript: void 0">Submit</a>
+            </div>
+        </div>
+    </div>
+<%}%>
+</div>
+<div class="col-md-12">
+<div class="js-wrap"></div>
+</div>

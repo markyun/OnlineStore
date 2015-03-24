@@ -1,0 +1,29 @@
+<div class= "number">
+	<div>
+	<form class="form-inline form-number">
+		<div class="form-group random_number">
+			<div class="row "> <%=member.groupPerNum%> random number is the Group.</div>
+			<div>
+				if you dont't like them, Click<div class="btn btn-step btn-replace"><img src="img/refresh.png" alt="refresh"> </div>to another random group.
+			</div>
+
+		</div>
+	</form>
+	</div>
+	<div class="newNumber">
+		<div>
+			<!-- <div class="row mand_choose">随机生成的号码</div> -->
+			<div class="js-num group" >
+				<%_.each(numbers,function (number){ if (numbers.prefix===null) {%>		
+				<span class="accNbr"><%=number.accNbr%></span>
+				<%} else {%>
+				<div class="number-box text-center" >
+				<span class="prefix" style="display:none"><%=number.prefix%></span>
+				<span class="accNbr"><%=number.accNbr%></span>
+				<span class="number-price"></span>
+				</div>
+				<%}}) %>
+			</div>
+		</div>
+	</div>
+</div>

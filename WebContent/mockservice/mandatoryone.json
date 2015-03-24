@@ -1,0 +1,42 @@
+[
+	{
+		"offerId":"1",
+		"offerName":"Flex time bundle1",
+		"saleListPrice":"€ 2.5",
+		"attrId":"aa",
+		"attrName":"free",
+		"attrValueDtoList":[{"value":"1 hour"},{"value":"12 hour"},{"value":"1 day"},{"value":"1 week"}],
+		"offerType":"Flex time bundle1",
+		"attrCode":"Y1"
+	},
+	{
+		"offerId":"2",
+		"offerName":"Flex time bundle2",
+		"saleListPrice":"€ 5.0",
+		"attrId":"bb",
+		"attrName":"paid",
+		"attrValueDtoList":[{"value":"1 hour"},{"value":"12 hour"},{"value":"1 day"},{"value":"1 week"}],
+		"offerType":"Flex time bundle2",
+		"attrCode":"Y2"
+	},
+	{
+		"offerId":"3",
+		"offerName":"Flex time bundle3",
+		"saleListPrice":"€ 2.5",
+		"attrId":"cc",
+		"attrName":"prePaid",
+		"attrValueDtoList":[{"value":"1 hour"},{"value":"12 hour"},{"value":"1 day"},{"value":"1 week"}],
+		"offerType":"Flex time bundle3",
+		"attrCode":"Y3"
+	},
+	{
+		"offerId":"4",
+		"offerName":"Flex time bundle4",
+		"saleListPrice":"€ 2.5",
+		"attrId":"dd",
+		"attrName":"postPaid",
+		"attrValueDtoList":[{"value":"1 hour"},{"value":"12 hour"},{"value":"1 day"},{"value":"1 week"}],
+		"offerType":"Flex time bundle4",
+		"attrCode":"Y4"
+	}
+]

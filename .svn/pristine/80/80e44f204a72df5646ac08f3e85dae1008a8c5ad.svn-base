@@ -1,0 +1,19 @@
+<div class="js-num">
+		<%_.each(numbers,function (number){%> <%if (number.modify===true) {%>
+		<div class="number-box text-center old active">
+			<span class="prefix" style="display:none"><%=number.prefix%></span>
+			<div class="number-box accNbr old"><%=number.accNbr%></div>
+		</div>
+		<%} else {%>
+		<div class="number-box text-center old" >
+			<span class="simCardId" style="display:none"><%=number.simCardId%></span>
+			<span class="prefix" style="display:none"><%=number.prefix%></span>
+			<span class="accNbr"><%=number.accNbr%></span>
+			<span class="number-price"></span>
+		</div>
+		<%}}); %>
+</div>
+
+
+
+

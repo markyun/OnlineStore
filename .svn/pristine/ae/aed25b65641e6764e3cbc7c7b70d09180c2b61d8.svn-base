@@ -1,0 +1,18 @@
+<div class="col-sm-12 col-md-12 step-header">
+	<span class="step-info">STEP <b>3</b> OF <b>6</b> </span> <%if(userType
+	=== 'family'){%> <span class="step-detail">CHOOSE THE NUMBER OF
+		FAMILY LINES AND FAMILY DATA BUNDLE</span> <%}else{%> <span
+		class="step-detail">CHOOSE THE NUMBER OF BUSINESS LINES AND
+		BUSINESS DATA BUNDLE</span><%}%>
+</div>
+
+<div class="col-sm-12 col-md-12 js-wrapper"></div>
+<div class="col-sm-12 col-md-12 bundle" style="text-align: center;">
+	<br> <br>
+	<p>Plan & Data Bundle</p>
+</div>
+
+<div class="row step-footer">
+	<a class="btn btn-step js-prev">Prev</a> <a
+		class="btn btn-step js-next" disabled="true">Next</a>
+</div>

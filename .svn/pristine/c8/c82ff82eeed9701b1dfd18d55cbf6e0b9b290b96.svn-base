@@ -1,0 +1,65 @@
+[
+	{
+		"modelId":"111",
+		"modelName":"APPLE White 3.0 500",
+		"stockType":"€ 509",
+		"brand":"APPLE",
+		"color":"White",
+		"camera":"3.0",
+		"Price":"500"
+	},
+	{
+		"modelId":"112",
+		"modelName":"APPLE Black 3.0 520",
+		"stockType":"€ 509",
+		"brand":"APPLE",
+		"color":"Black",
+		"camera":"3.0",
+		"Price":"520"
+	},
+	{
+		"modelId":"113",
+		"modelName":"ZTE Gold 3.0 511",
+		"stockType":"€ 509",
+		"brand":"ZTE",
+		"color":"Gold",
+		"camera":"3.0",
+		"Price":"511"
+	},
+	{
+		"modelId":"114",
+		"modelName":"SAMSUNG Red 5.0 507",
+		"stockType":"€ 509",
+		"brand":"SAMSUNG",
+		"color":"Red",
+		"camera":"5.0",
+		"Price":"507"
+	},
+	{
+		"modelId":"114",
+		"modelName":"NOKIA Blue 8.0 505",
+		"stockType":"€ 509",
+		"brand":"NOKIA",
+		"color":"Blue",
+		"camera":"8.0",
+		"Price":"505"
+	},
+	{
+		"modelId":"114",
+		"modelName":"HUAWEI Pink 10 510",
+		"stockType":"€ 509",
+		"brand":"HUAWEI",
+		"color":"Pink",
+		"camera":"10",
+		"Price":"510"
+	},
+	{
+		"modelId":"114",
+		"modelName":"HTC Yellow 12 506",
+		"stockType":"€ 509",
+		"brand":"HTC",
+		"color":"Yellow",
+		"camera":"12",
+		"Price":"506"
+	}
+]

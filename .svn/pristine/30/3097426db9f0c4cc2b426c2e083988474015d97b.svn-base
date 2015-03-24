@@ -1,0 +1,19 @@
+<form class="form-inline form-number">
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="126546">
+		<div class="btn btn-step btn-random">Random</div>
+	</div>
+</form>
+
+<%_.each(numbers,function (number){%> <%if (numbers.price===null) {%>
+<div class="js-num">
+	<div class="number-box"><%=number.num%></div>
+</div>
+<%} else {%>
+<div class="js-num">
+	<div class="number-box">
+		<%=number.num%> <span class="number-price"><%=number.price%></span>
+	</div>
+
+</div>
+<%}}) %>

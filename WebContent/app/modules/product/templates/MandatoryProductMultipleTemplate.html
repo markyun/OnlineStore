@@ -1,0 +1,58 @@
+<div class="row mand_choose">Required to Multiple
+	choices:<%=groupName%></div>
+<div class="row select-multiply">
+	<%_.each(mandatorymulti,function (multi,index,mandatorymulti){if(index
+	=== 0){%>
+	<div class="col-md-3 col-sm-3">
+		<div class="panel panel-default js-multiply-panel <%=indexss%> active"
+			data-offer-id="<%= multi.offerId %>"
+			data-offer-groupid="<%=multi.offerGroupId%>"
+			data-index-step="<%=indexss%>" data-eff-type="<%=multi.effType%>"
+			data-pro-necessary="1" data-group-type="C">
+			<div class="panel-heading"><a class="head_a"><%=multi.offerName%></a></div>
+			<div class="panel-body">
+				<div class="cabin-info">
+					<span class="highlight"><%=multi.comments%></span>
+				</div>
+				<%if(multi.offerAttrList){
+				if(multi.offerAttrList.attrValueDtoList&&multi.offerAttrList.inputType===1)
+				{%><%=multi.offerAttrList.attrName%><select
+					class="form-control cabin-select" name="time">
+					<%if(multi.offerAttrList.nullable === 'Y'){%>
+					<option value=""></option> <%}%>
+					<%_.each(multi.offerAttrList.attrValueDtoList,function(attr){%>
+					<option value="<%=attr.attrId%>,<%=attr.value%>"><%=attr.valueMark%></option>
+					<%})%>
+				</select> <%}}%>
+				<div class="cabin-btn">✔</div>
+			</div>
+		</div>
+	</div>
+	<%}else{%>
+	<div class="col-md-3 col-sm-3">
+		<div class="panel panel-default js-multiply-panel <%=indexss%>"
+			data-offer-id="<%= multi.offerId %>"
+			data-offer-groupid="<%=multi.offerGroupId%>"
+			data-eff-type="<%=multi.effType%>" data-pro-necessary="1"
+			data-index-step="<%=indexss%>" data-group-type="C">
+			<div class="panel-heading"> <a class="head_a"><%=multi.offerName%></a> </div>
+			<div class="panel-body">
+				<div class="cabin-info">
+					<span class="highlight"><%=multi.comments%></span>
+				</div>
+				<%if(multi.offerAttrList){
+				if(multi.offerAttrList.attrValueDtoList&&multi.offerAttrList.inputType===1)
+				{%><%=multi.offerAttrList.attrName%><select
+					class="form-control cabin-select" name="time">
+					<%if(multi.offerAttrList.nullable === 'Y'){%>
+					<option value=""></option> <%}%>
+					<%_.each(multi.offerAttrList.attrValueDtoList,function(attr){%>
+					<option value="<%=attr.attrId%>,<%=attr.value%>"><%=attr.valueMark%></option>
+					<%})%>
+				</select> <%}}%>
+				<div class="cabin-btn">Choose</div>
+			</div>
+		</div>
+	</div>
+	<%}})%>
+</div>

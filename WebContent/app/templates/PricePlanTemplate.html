@@ -1,0 +1,22 @@
+<div class="col-sm-12 col-md-12 step-header">
+	<span class="step-info">STEP <b>3</b> OF <b>6</b> </span>
+	<span class="step-detail">SELECT THE PLAN FOR YOUR MOBILE LINES</span>
+</div>
+
+<div class="col-sm-12 col-md-12 js-order-list"></div>
+
+<div class="row step-footer">
+	<a class="btn btn-step js-prev">Prev</a>
+	<a class="btn btn-step js-save" href="javascript: void 0">Save</a>
+	<a class="btn btn-step js-next" disabled="true" href="javascript: void 0">Next</a>
+</div>
+
+<script>
+
+$(function(){
+	$(".js-order-list").delegate('.btn-next', 'click', function() {
+		$("html, body").animate({"scrollTop": (($(this).offset().top)+50) + "px" }, 500, "swing");
+	});
+});
+
+</script>

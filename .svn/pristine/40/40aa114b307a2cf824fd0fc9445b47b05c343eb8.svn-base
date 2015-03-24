@@ -1,0 +1,28 @@
+<div class="row mand_choose">Multiple choices：<%=groupName%></div>
+<div class="row option-multi">
+	<%_.each(optionmulti,function (multi){%>
+	<div class="col-md-3 col-sm-3">
+		<div class="panel panel-default js-multiply-option"
+			data-offer-id="<%= multi.offerId %>"
+			data-offer-groupid="<%=multi.offerGroupId%>"
+			data-eff-type="<%=multi.effType%>" data-pro-necessary="0"
+			data-group-type="C">
+			<div class="panel-heading"><a class="head_a"><%=multi.offerName%></a></div>
+			<div class="panel-body">
+				<div class="cabin-info">
+					<span class="highlight"><%=multi.comments%></span>
+				</div>
+				<%if(multi.offerAttrList){if(multi.offerAttrList.attrValueDtoList&&multi.offerAttrList.inputType===1){%><%=multi.offerAttrList.attrName%><select
+					class="form-control cabin-select" name="time">
+					<%if(multi.offerAttrList.nullable === 'Y'){%>
+					<option value=""></option> <%}%>
+					<%_.each(multi.offerAttrList.attrValueDtoList,function(attr){%>
+					<option value="<%=attr.attrId%>,<%=attr.value%>"><%=attr.valueMark%></option>
+					<%})%>
+				</select> <%}}%>
+				<div class="cabin-btn">Choose</div>
+			</div>
+		</div>
+	</div>
+	<%})%>
+</div>

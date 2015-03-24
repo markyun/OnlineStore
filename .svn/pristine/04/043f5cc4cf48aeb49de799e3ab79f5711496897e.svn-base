@@ -1,0 +1,14 @@
+<div class="modal-header" style="text-align: center;">There were
+	<%=detailView.length%> numbers in all</div>
+<div class="modal-body">
+	<div class="number-panle">
+		<ul>
+		<%_.each(detailView,function(detail){%>
+			<li class="number-d-list">
+			<span class="accNbr"><%=detail.accNbr%></span>
+			</li>
+		<%})%>
+		</ul>
+	</div>
+
+</div>

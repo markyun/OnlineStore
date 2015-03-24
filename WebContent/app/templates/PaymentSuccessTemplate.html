@@ -1,0 +1,46 @@
+<div class="col-sm-12 col-md-12 step-header"></div>
+<div class="row">
+	<div class="panel-body subscriber-list payment-s  ">
+		<div class="pay-title">
+             <div class="wait_message">
+            <span class="msgbox_layer" style="z-index: 10000;" id="mode_tips_v2">
+                     <img src="img/loading.gif" alt="">Your bill is being processed, Just a moment, please.
+                </span>
+            </span>
+        	</div>
+        	<div class="success_message" hidden="true"><img src="img/checkb.png" alt=""> &nbsp;Payment Successfully!</div>
+        </div>
+		<div class="pay-success">
+			<div class="form-group">
+				<label class="control-label">User Type:</label> <label
+					class=" control-label"> <%=userType%> </label>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Package:</label> <label
+					class="control-label"> <%=bundel%> </label>
+			</div>
+			<%if(total){%>
+			<div class="form-group">
+				<label class=" control-label">Total:</label> <label
+					class=" control-label cri_price"> <%=total%> </label>
+			</div>
+			<%}%>
+			<%if(method){%>
+			<div class="form-group">
+				<label class=" control-label">Payment Method:</label> <label
+					class="control-label"> <%=method%> </label>
+			</div>
+			<%}%>
+			<%if(card){%>
+			<div class="form-group">
+				<label class=" control-label">Card Number:</label> <label
+					class="control-label"> <%=card%> </label>
+			</div>
+			<%}%>
+		</div>
+	</div>
+</div>
+<div class="row step-footer">
+	<a class="btn btn-step subs-list">Subscriber List</a> <a
+		class="btn btn-step shopping">Continue Shopping</a>
+</div>

@@ -1,0 +1,28 @@
+<div class="row mand_choose">Required to Choose all：<%=groupName%></div>
+<div class="row select-all">
+	<%_.each(mandatoryall,function (all){%>
+	<div class="col-md-3 col-sm-3">
+		<div class="panel panel-default js-all-panel active"
+			data-offer-id="<%=all.offerId%>"
+			data-offer-groupid="<%=all.offerGroupId%>"
+			data-eff-type="<%=all.effType%>" data-pro-necessary="1"
+			data-group-type="A">
+			<div class="panel-heading"> <a class="head_a"> <%=all.offerName%></a></div>
+			<div class="panel-body">
+				<div class="cabin-info">
+					<span class="highlight"><%=all.comments%></span>
+				</div>
+				<%if(all.offerAttrList){if(all.offerAttrList.attrValueDtoList&&all.offerAttrList.inputType===1){%><%=all.offerAttrList.attrName%><select
+					class="form-control cabin-select" name="time">
+					<%if(all.offerAttrList.nullable === 'Y'){%>
+					<option value=""></option> <%}%>
+					<%_.each(all.offerAttrList.attrValueDtoList,function(attr){%>
+					<option value="<%=attr.attrId%>,<%=attr.value%>"><%=attr.valueMark%></option>
+					<%})%>
+				</select> <%}}%>
+				<div class="cabin-btn">✔</div>
+			</div>
+		</div>
+	</div>
+	<%})%>
+</div>
