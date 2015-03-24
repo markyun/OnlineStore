@@ -1,0 +1,132 @@
+@charset "UTF-8";
+@import "public";
+@import "header";
+@import "cabin";
+@import "btns";
+@import "scroll";
+
+.page-content {
+    padding-top: $sppt;
+
+    @at-root .step-title {
+        width: 100%;
+        font-size: 1.9rem;
+        color: #000;
+        text-align: center;
+        line-height: 1.5;
+    }
+    @at-root .btn-section {
+        margin: 60px auto 0;
+    }
+}
+
+.scroll-content + .scroll-content {
+    padding-top: 26px;
+}
+
+.scroll-manage {
+    text-align: left;
+    margin: 0 12px;
+    height: 38px;
+    position: relative;
+    & > * {position: absolute;}
+    @at-root .manage-name {
+        color: #999;
+        font-weight: bold;
+    }
+    @at-root .manage-value {
+        margin-left: 8px;
+        color: $brand;
+    }
+    @at-root .filter-btn {
+        //position: absolute;
+        top: -8px;
+        right: 0;
+        width: 96px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        font-size: 1.1rem;
+        color: #FFF;
+        background-color: $brand;
+    }
+}
+
+.scroll-area {
+    padding: 0 50px;
+    height: 420px; /* 重置 */
+    .paging-btn.left, .paging-btn.right { top: 170px; }
+
+    @at-root .phone-box {
+        width: 33.3%;
+        height: 210px;
+        float: left;
+
+
+        position: relative;
+        & > * {position: absolute}
+        @at-root .phone-image {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            width: 82px;
+        }
+        @at-root .phone-info {
+            left: 105px;
+            padding-top: 20px;
+            text-align: left;
+            @at-root .phone-name {
+                font-weight: bold;
+                font-size: 1.0rem;
+                line-height: 1.2;
+            }
+            @at-root .detail-link {
+                color: $brand;
+                font-size: 0.9rem;
+                line-height: 2.2;
+            }
+            @at-root .phone-price {
+                //font-weight: bold;
+                font-size: 2rem;
+                line-height: 1.5;
+                color: $brand;
+            }
+            @at-root .buy-btn {
+                width: 120px;
+                height: 40px;
+                line-height: 40px;
+                //margin: 0 auto;
+                text-align: center;
+                font-size: 1.2rem;
+                color: #999;
+                border: 1px solid #999;
+                border-radius: 9px;
+                &.active {
+                    color: #fff;
+                    border: 1px solid $brand;
+                    background-color: $brand;
+                }
+            }
+        }
+    }
+}
+
+
+
+.cabin-btn {
+    width: 80%;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
+    border: 1px solid #999;
+    border-radius: 9px;
+}
+
+
+.btn-section {
+    margin-top: 22px;
+    //margin-bottom: 36px;
+}

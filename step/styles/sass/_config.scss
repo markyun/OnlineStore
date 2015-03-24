@@ -1,0 +1,90 @@
+// =============================================================
+//  配置参数
+// =============================================================
+$header-height: 65px;
+$bg: #EEE; // 主体背景色
+$hbg: #333; // 头部背景色
+$brand: #FF6008;  // 主色（橘红色）
+
+$fgrey: #B0B9C0; // 灰色字
+
+$step-prompt-padding-top: 32px;
+$sppt: $step-prompt-padding-top;
+
+$step-button-width: 150px;
+$sbw: $step-button-width;
+
+$step-button-height: 40px;
+$sbh: $step-button-height;
+
+
+$step1h: 600px;
+
+
+$group-box-size: 135px;
+$gbs: $group-box-size;
+
+
+
+$scroll-section-header-height: 54px;
+$sshh: $scroll-section-header-height;
+
+
+$scroll-area-height: 350px;
+$sah: $scroll-area-height;
+
+$paging-button-size: 60px;
+$pbs: $paging-button-size;
+
+// =============================================================
+//  响应式mixin
+// =============================================================
+@mixin wide($point) {
+    $point-map: (
+        "default" : 9999, //无上限，表示默认情况
+        "large": 1180px,
+        "normal": 960px,
+        "small": 480px
+    );
+
+    @if map-has-key($point-map, $point) {
+        @if $point == "default" {
+            @content;
+        } @else {
+            @media screen and (min-width: map-get($point-map, $point)) {
+                @content;
+            }
+        }
+    }
+}
+
+
+// =============================================================
+//  画三角形
+// =============================================================
+@mixin triangle($direction, $size, $borderColor ) {
+    content:"";
+    height: 0;
+    width: 0;
+
+    @if $direction == top {
+        border-bottom:$size solid $borderColor;
+        border-left:$size dashed transparent;
+        border-right:$size dashed transparent;
+    }
+    @else if $direction == right {
+        border-left:$size solid $borderColor;
+        border-top:$size dashed transparent;
+        border-bottom:$size dashed transparent;
+    }
+    @else if $direction == bottom {
+        border-top:$size solid $borderColor;
+        border-left:$size dashed transparent;
+        border-right:$size dashed transparent;
+    }
+    @else if $direction == left {
+        border-right:$size solid $borderColor;
+        border-top:$size dashed transparent;
+        border-bottom:$size dashed transparent;
+    }
+}

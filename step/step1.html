@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit"> <!-- 优先使用webkit内核渲染页面 -->
+    <meta name="format-detection" content="telphone=no, email=no">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="styles/step1.css">
+</head>
+
+<body>
+
+    <div class="screen-wrapper">
+        <header class="page-header">
+            <div class="page-title">ZTEsoft</div>
+            <nav class="page-nav">
+                <span class="active">TEXT 1</span>
+                <span>TEXT 2</span>
+                <span>TEXT 3</span>
+            </nav>
+            <div class="page-notify">
+                <span>Login</span>
+            </div>
+        </header>
+        <div class="page-content">
+            <div class="step-prompt">
+                <span class="step-info">STEP <b>1</b> OF <b>7</b></span>
+            </div>
+            <div class="step-title">Select who you are</div>
+
+            <div class="cabin-section">
+                <a class="cabin" href="#">
+                    <img class="cabin-poster" src="icon/single.PNG" alt="Single">
+                    <div class="cabin-intro">1 people</div>
+                    <div class="cabin-info">Single</div>
+                </a>
+                <a class="cabin active" href="#">
+                    <img class="cabin-poster" src="icon/family.PNG" alt="Family">
+                    <div class="cabin-intro">2 - 6 people</div>
+                    <div class="cabin-info">Family</div>
+                </a>
+                <a class="cabin" href="#">
+                    <img class="cabin-poster" src="icon/business.PNG" alt="Business">
+                    <div class="cabin-intro">200+ people</div>
+                    <div class="cabin-info">Business</div>
+                </a>
+            </div>
+            <div class="btn-section">
+                <a class="step-btn" href="greeting.html">Prev</a>
+                <a class="step-btn" href="#">Save</a>
+                <a id="next" class="step-btn disabled" href="step2.html">Next</a>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

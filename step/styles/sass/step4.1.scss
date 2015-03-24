@@ -1,0 +1,27 @@
+@charset "UTF-8";
+@import "public";
+@import "header";
+@import "cabin";
+@import "btns";
+@import "scroll";
+
+.page-content {
+    padding-top: $sppt;
+
+    @at-root .step-title {
+        width: 100%;
+        font-size: 1.9rem;
+        color: #000;
+        text-align: center;
+        line-height: 1.5;
+    }
+    @at-root .btn-section {
+        margin: 60px auto 0;
+    }
+}
+
+
+
+.btn-section {
+    margin-top: 26px;
+}

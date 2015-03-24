@@ -1,0 +1,95 @@
+@charset "UTF-8";
+@import "public";
+@import "header";
+@import "cabin";
+@import "btns";
+
+.page-content {
+    //height: $step1h;
+    padding-top: $sppt;
+
+    @at-root .step-title {
+        width: 100%;
+        //height: 50px;
+        font-size: 1.9rem;
+        color: #000;
+        text-align: center;
+        line-height: 1.5;
+        // @at-root .step-info {
+        //     color: $fgrey;
+        // }
+    }
+    @at-root .cabin-section {
+        margin-top: 36px;
+        @at-root .text-cabin {
+            height: 200px;
+        }
+    }
+    @at-root .btn-section {
+        margin: 60px auto 0;
+    }
+}
+
+.group-section {
+    margin-top: 36px;
+    @at-root .group-box {
+        display: inline-block;
+        width: $gbs;
+        height: $gbs;
+        border: 1px solid #DDD;
+        border-radius: 50%;
+        background-color: #FFF;
+        & + & { margin-left: 68px; }
+        &.active {
+            border: 1px solid $brand;
+            .group-title {color: #FFF;
+            background-color: $brand;}
+            .group-input {color: $brand;}
+        }
+        &.empty {
+            width: $gbs - 3px;
+            height: $gbs - 3px;
+            border: 4px dashed #BBB;
+            background-clip: content-box;
+            color: #999;
+            font-size: 1.2rem;
+            line-height: $gbs;
+            text-align: center;
+        }
+        overflow: hidden;
+        @at-root .group-title {
+            padding-top: 8px;
+            height: 40px;
+            line-height: 40px;
+            color: #333;
+            background-color: #C3C3C3;
+            text-align: center;
+        }
+        @at-root .group-content {
+            padding-top: 1px;
+            text-align: center;
+            @at-root .group-input {
+                display: block;
+                margin: 0 auto;
+                padding: 6px 0;
+                border: none;
+                outline: none;
+                text-align: center;
+                //size: 1;
+                color: #333;
+                border-bottom: 1px solid #DDD;
+                width: 50%;
+                height: 50px;
+                font-size: 2.6rem;
+                line-height: 1.5;
+            }
+        }
+
+        @at-root .group-image {
+            display: inline-block;
+            width: $gbs;
+            height: $gbs;
+        }
+    }
+
+}

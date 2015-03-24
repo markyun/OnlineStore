@@ -1,0 +1,31 @@
+@charset "UTF-8";
+@import "config";
+
+/*-------------------------------------------*\
+  步骤按钮(prev save next)的样式
+\*-------------------------------------------*/
+@at-root .step-btn {
+    display: inline-block;
+    width: $sbw;
+    height: $sbh;
+    line-height: $sbh;
+    text-align: center;
+    font-size: 1.5rem;
+    color: $brand;
+    background-color: #FFF;
+
+    border: 1px solid $brand;
+    border-radius: $sbh;
+    & + & {
+        margin-left: 36px;
+    }
+
+    &.disabled {
+        color: $fgrey;
+        border: 1px solid $fgrey;
+    }
+    &.active {
+        color: #FFF;
+        background-color: $brand;
+    }
+}

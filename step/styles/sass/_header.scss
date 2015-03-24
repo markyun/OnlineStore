@@ -1,0 +1,50 @@
+@charset "UTF-8";
+@import "config";
+
+
+.page-header {
+    width: 100%;
+    height: $header-height;
+    color: #FFF;
+    background-color: $hbg;
+    display: table;
+    table-layout: fixed;
+    & > * {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    @at-root .page-title {
+        width: 16%;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-align: right;
+        //text-indent: 22px;
+    }
+    @at-root .page-nav {
+        //width: 68%;
+        font-size: 1.2rem;
+        color: #A9A9A9;
+        padding-left: 45px;
+        //font-weight: bold;
+        //text-align: center;
+        //text-indent: 22px;
+        & > * {
+            display: inline-block;
+            width: 25%;
+            @include wide("normal") {
+                width: 15%;
+            }
+            //text-indent: 22px;
+        }
+        & > .active {
+            color: #FFF;
+        }
+    }
+    @at-root .page-notify {
+        width: 12%;
+        font-size: 0.9rem;
+        //font-weight: bold;
+        text-align: center;
+        //text-indent: 22px;
+    }
+}

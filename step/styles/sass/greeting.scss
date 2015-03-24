@@ -1,0 +1,18 @@
+@charset "UTF-8";
+@import "public";
+@import "header";
+@import "cabin";
+
+.page-content {
+    //height: $step1h;
+    padding-top: 128px;
+    @at-root .cabin {
+        //margin-top: 60px;
+        & + & {
+            margin-left: 100px;
+            @include wide("large") {
+                margin-left: 180px;
+            }
+        }
+    }
+}

@@ -1,0 +1,101 @@
+@charset "UTF-8";
+@import "public";
+@import "header";
+@import "cabin";
+@import "btns";
+@import "scroll";
+
+.page-content {
+    padding-top: $sppt;
+
+    @at-root .step-title {
+        width: 100%;
+        font-size: 1.9rem;
+        color: #000;
+        text-align: center;
+        line-height: 1.5;
+    }
+    @at-root .btn-section {
+        margin: 60px auto 0;
+    }
+}
+
+.scroll-content + .scroll-content {
+    padding-top: 26px;
+}
+.scroll-area-tips {
+    height: 40px;
+    line-height: 40px;
+    //padding-top: 24px;
+    padding: 6px 0 6px 60px;
+    color: #999;
+    text-align: left;
+    &:before {
+        content: " * "
+    }
+}
+.scroll-area {
+    //background-color: #bbb;
+    height: 275px; /* 重置滚动区域高度 */
+    padding: 10px 30px;
+}
+
+.text-cabin {border: 1px solid #DDD;}
+.text-cabin + .text-cabin {
+    margin-left: 10px;
+}
+.thin-text {
+    width: 80%;
+    margin: 6px auto;
+}
+
+
+.cabin-select, .cabin-btn {
+    width: 80%;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
+    border: 1px solid #999;
+    border-radius: 9px;
+}
+.text-cabin.active .cabin-select {
+    border: 1px solid $brand;
+    background-image: url(../icon/arrow.png);
+}
+.text-cabin.active .cabin-btn {
+    border: 1px solid $brand;
+    color: #FFF;
+    background-color: $brand;
+}
+
+
+.cabin-select {
+
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+
+    line-height: 40px;
+    text-indent: 16px;
+    text-align: center;
+    font-size: 1.0rem;
+
+    color: #333;
+    background-image: url(../icon/arrow-grey.png);
+    background-position: 96%;
+    background-size: 15%;
+    background-repeat:  no-repeat;
+
+}
+
+
+
+.btn-section {
+    margin-top: 26px;
+    margin-bottom: 36px;
+}
