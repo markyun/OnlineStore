@@ -16,16 +16,26 @@ define([ 'app', 'views/AppView' ], function(app, AppView) {
 			'migrate/offer':'migrate',
 			'choose/migratePlan(:member/:step)':'changeMigratePlan',
 			'choose/successfully':'successfully',
-			'shopping/cart':'cart'
+			'shopping/cart(/:custOrderList)':'cart',
+			'choose/fee':'fee'
 		},
 		index : function() {
 			if (!app.appView) {
 				app.appView = new AppView();
 			}
+			app.members = null;
+			app.isMigrate = null;
 			app.operationType = null;
 			app.orderItemdtoList = null;
 			app.reModifyBundle = null;
 			app.modifyRes = null;
+			app.selectedSubsId = null;
+			app.prev = null;
+			app.SubsPlanDetailDto = null;
+			app.accNbr = null;
+			app.subsPlanIdBundle = null;
+			app.subs = null;
+			app.prefix = null;
 			app.appView.render();
 		},
 
@@ -92,7 +102,6 @@ define([ 'app', 'views/AppView' ], function(app, AppView) {
 			require(['views/MigrateView'], function(MigrateView){
 				var migrateView = new MigrateView();
 				app.appView.pageSlider(migrateView.render().$el);
-				app.operationType='M';
 			});
 		},
 		changeMigratePlan:function(member,step){
@@ -110,10 +119,16 @@ define([ 'app', 'views/AppView' ], function(app, AppView) {
 				app.appView.pageSlider(successView.render().$el);
 			});
 		},
-		cart:function(){
+		cart:function(custOrderList){
 			require(['views/ShoppingCartView'], function(ShoppingCartView){
 				var shoppingCartView = new ShoppingCartView();
-				app.appView.pageSlider(shoppingCartView.render().$el);
+				app.appView.pageSlider(shoppingCartView.render(custOrderList).$el);
+			});
+		},
+		fee:function(){
+			require(['views/QueryFeeView'], function(QueryFeeView){
+				var queryFee = new QueryFeeView();
+				app.appView.pageSlider(queryFee.render().$el);
 			});
 		}
 	});

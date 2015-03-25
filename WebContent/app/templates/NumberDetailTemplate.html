@@ -1,13 +1,16 @@
-<div class="modal-header" style="text-align: center;">There were
-	<%=detailView.length%> numbers in all</div>
+<%if(detailView.length>1){%>
+<div class="modal-header" style="text-align: center;">There are
+	<%=detailView.length%> numbers in total</div>
+<%}else{%>
+<div class="modal-header" style="text-align: center;">There is
+	<%=detailView.length%> number in total</div>
+<%}%>
 <div class="modal-body">
 	<div class="number-panle">
 		<ul>
-		<%_.each(detailView,function(detail){%>
-			<li class="number-d-list">
-			<span class="accNbr"><%=detail.accNbr%></span>
-			</li>
-		<%})%>
+			<%_.each(detailView,function(detail){%>
+			<li class="number-d-list"><span class="accNbr"><%=detail.accNbr%></span>
+			</li> <%})%>
 		</ul>
 	</div>
 

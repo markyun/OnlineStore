@@ -38,21 +38,51 @@ define([ 'app', 'text!templates/LoginTemplate.html' ], function(app, template) {
 						'custOrderId' : app.custOrderId
 					}
 				}, function(data) {
+					if(data.AuthCustResultDto.result != 1){
 					if(data.AuthCustResultDto.custDto){
 						console.log(data);
+						var acctList = [];
+						var acctListTemp = data.AuthCustResultDto.custDto.acctList;
+						if(acctListTemp) {
+							if(acctListTemp.length){
+								acctList = acctListTemp;
+							} else {
+								acctList.push(acctListTemp);
+							}
+						}
+						var acctDtoList = [];
+						for(var i = 0; i < acctList.length; i++) {
+							if(acctList[i].postpaid === "Y") {
+								acctDtoList.push(acctList[i]);
+							}
+						}
+						app.acctDtoList = acctDtoList;
 						app.user = {
 								'username' : username,
 								'password' : password,
 								"custType" : data.AuthCustResultDto.custDto.custType,
 								'custId' : data.AuthCustResultDto.custDto.custId,
-		    					'acctList' : data.AuthCustResultDto.custDto.acctList
+		    					'acctList' : acctDtoList
 							};
+						var current = that.$('#username');
+						var $current = $(current);
+						$current.removeClass('error');
+						var paCurrent  = that.$('#password');
+						var $paCurrent = $(paCurrent);
+						$paCurrent.removeClass('error');
 						var opts = {};
 						fish.showToast('Login success.', opts);
 						Backbone.trigger('loginsuccess');
 						that.remove();
+					}
 					}else{
 						that.$el.find('.error_msg').html("User name or password is incorrect!");
+						var current = that.$('#username');
+						var $current = $(current);
+						$current.addClass('error');
+						var paCurrent  = that.$('#password');
+						var $paCurrent = $(paCurrent);
+						$paCurrent.addClass('error');
 					}
 					if(app.userType === "business" && app.user.custType === "A") {
 						var opts = {};

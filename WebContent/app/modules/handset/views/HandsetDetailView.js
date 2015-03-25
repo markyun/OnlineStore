@@ -1,15 +1,11 @@
 /**
  * Created by huangxinghui on 2015/2/13.
  */
-define([ 'app', 'text!modules/handset/templates/HandsetDetailTemplate.html'],
+define([ 'app', 'text!modules/handset/templates/HandsetDetailTemplate.html' ],
 		function(app, template) {
 			var HandsetDetailView = Backbone.View.extend({
 				template : _.template(template),
-				events:{
-					'click .select':'choose'
-				},
 				render : function() {
-					app.goodsPordSelect = app.goodsSelect;
 					var phones = app.phones;
 					var modelId = app.modelId;
 					var phone = null;
@@ -22,24 +18,25 @@ define([ 'app', 'text!modules/handset/templates/HandsetDetailTemplate.html'],
 					this.$el.append(this.template({
 						"address" : app.address,
 						"phone" : phone,
-						"select":app.goodsSelect
 					}));
 					$($('.step-footer')).css('display', 'none');
+					setTimeout(this.setimg, 55);
 					return this;
 				},
-				choose : function(e) {
-					var goodsId = null;
-					var $current = $(e.currentTarget);
-					if (!$current.hasClass('active')) {
-						goodsId = $current.data('modelId');
-					} else {
-						goodsId = null;
-					}
-					if(goodsId != null){
-						app.goodsPordSelect = goodsId;
-					}else{
-						app.goodsPordSelect = goodsId;
-					}
+				setimg : function() {
+					$(".phone_name").each(
+							function() {
+								if ($(this).text() == 'Sumsung S5') {
+									$(this).parents(".phone").find("img").attr(
+											"src", "img/s5.png");
+								}
+								;
+								if ($(this).text() == 'Sumsung S4') {
+									$(this).parents(".phone").find("img").attr(
+											"src", "img/s42.png");
+								}
+								;
+							});
 				}
 			});
 

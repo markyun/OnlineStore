@@ -1,30 +1,45 @@
-<%_.each(subs,function(sub,index, subs){%>
-<div class="row subs-header acc_nbr" data-subs-id="<%=sub.subsId%>"><%=sub.accNbr%></div>
-<div class="row subs-detail">
-	<div class="row col-md-6">
-		<label class="col-md-4 control-label">Status</label>
-		<div class="col-md-8"><%=sub.prodStateName%></div>
-	</div>
-	<div class="row col-md-6">
-		<label class="col-md-4 control-label">Subscrption Plan</label>
-		<div class="col-md-8"><%=sub.subsPlanName%></div>
-	</div>
-	<div class="row col-md-6">
-		<label class="col-md-4 control-label">Service Start Date</label>
-		<div class="col-md-8"><%=sub.prodStateDate%></div>
-	</div>
-	<div class="row col-md-6">
-		<label class="col-md-4 control-label">Service End Date</label>
-		<%if(!flag){%>
-		<div class="col-md-4"><%=sub.completedDate%></div>
-		<div class="row col-md-4">
-			<a class="btn btn-step js-next" data-index="<%=index%>" data-subs-id="<%=sub.subsId%>">Change
-				Plan</a>
+<div class="panel-body">
+	<div class="row">
+		<%_.each(subs,function(sub,index, subs){%>
+		<div class="row subscriber-list">
+			<div class="col-md-12">
+				<div class="col-md-12">
+					<span class="subs-number"><%=sub.accNbr%></span>
+				</div>
+				<div class="col-md-6">
+					<p>
+						<span>Status:</span> <span><%=sub.prodStateName%></span>
+					</p>
+				</div>
+				<div class="col-md-6">
+					<p>
+						<span>Subscriber plan:</span> <span><%=sub.subsPlanName%></span>
+					</p>
+				</div>
+				<%if(sub.completedDate){%>
+				<div class="col-md-6">
+					<p>
+						<span>serivce start Date: </span> <span><%=sub.completedDate%></span>
+					</p>
+				</div>
+				<%}%>
+				<%if(sub.prodExpDate){%>
+				<div class="col-md-6">
+					<p>
+						<span>serivce end Date: </span> <span><%=sub.prodExpDate%></span>
+					</p>
+
+				</div>
+				<%}%>
+			</div>
+			<div class="col-md-12  acc-step step-footer">
+				<a class="btn btn-step js-next" data-index="<%=index%>"
+					data-subs-id="<%=sub.subsId%>">Change plan</a>
+			</div>
 		</div>
-		<%}else{%>
-		<div class="col-md-8"><%=sub.completedDate%></div>
-		<%}%>
+		<%})%>
 	</div>
+
 </div>
-<%})%>
+<div class="row step-footer"></div>
 

@@ -7,16 +7,7 @@
 
 <div class="row step-footer">
 	<a class="btn btn-step js-prev">Prev</a>
+	<a class="btn btn-step js-fee">QueryFee</a>
 	<a class="btn btn-step js-save" href="javascript: void 0">Save</a>
 	<a class="btn btn-step js-next" disabled="true" href="javascript: void 0">Next</a>
 </div>
-
-<script>
-
-$(function(){
-	$(".js-order-list").delegate('.btn-next', 'click', function() {
-		$("html, body").animate({"scrollTop": (($(this).offset().top)+50) + "px" }, 500, "swing");
-	});
-});
-
-</script>

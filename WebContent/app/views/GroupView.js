@@ -59,7 +59,9 @@ function(app//
             }
             else {
                 that.$el.find('.js-wrapper').empty();
-                that.$el.find('.js-wrapper').append(_.template(compayTemp));
+                that.$el.find('.js-wrapper').append(_.template(compayTemp,{
+                	"members" : app.members,
+                }));
             }
             console.log(app.SubsPlanDetailDto.offerGroupDtoList);
             var offerGroupDtoListTemp = app.SubsPlanDetailDto.offerGroupDtoList;
@@ -159,38 +161,148 @@ function(app//
         },
 
         next : function() {
+        	var that = this ;
+        	//如果是企业的话，点击next 组装members ，并验证是否数量的
             if (app.userType === "business") {
                 app.business = [];
                 app.groupName = [];
                 app.groupPerNum = [];
                 var $group = $(".group-box");
-                for ( var i = 0; i < $group.length; i++) {
-                    var groupName = $($group[i]).find('.groupName').val();
-                    var groupPerNum = $($group[i]).find('.groupNum').val();
-                    if (groupName != "" && groupName != undefined) {
-                        app.members[i] = {
-                            'groupName' : groupName,
-                            'groupPerNum' : groupPerNum,
-                            step : 0,
-                        };
-//                        app.groupName[i] = groupName;
-//                        app.groupPerNum[i] = groupPerNum;
-//                        app.business[i] = {
-//                            'groupName' : groupName,
-//                            'groupPerNum' : groupPerNum,
-//                            step : 0
-//                        };
-                    }
+                
+                if (app.reModifyBundle){
+                	var orderItem = app.orderItemdtoList;
+     				//添加分组
+     				if(orderItem.length <= $group.length) {
+     					for ( var i = 0; i < $group.length-1; i++) {
+         					var groupPerNum = $($group[i]).find('.groupNum').val();
+         					
+         					if  (i < orderItem.length-1){
+         						//因为orderItem 第一个是bundle，第二个才是含有号码
+         						if(orderItem[i+1].resourceDtoList.length===parseInt(groupPerNum)) {
+         							app.members[i] = {
+         									number : i + 1,
+         	                                'groupName' : groupName,
+         	                                'groupPerNum' : groupPerNum,
+         	                                'resourceDtoList':orderItem[i+1].resourceDtoList,
+         	                                'isFinished':true,
+         	                                step : 0,
+         	                            };	
+         						}
+         						else {
+         							var resourceDtoList = orderItem[i+1].resourceDtoList;
+         							if (resourceDtoList.length>0) {
+         								for (var j=0; j<resourceDtoList.length; j++){
+             								var prefix 	= resourceDtoList[j].prefix;
+            								var acc_nbr = resourceDtoList[j].accNbr;
+            								that.unlockAccNbr(prefix,acc_nbr,null);
+             							}
+         								
+         							}
+         							
+         							app.members[i] = {
+         									number : i + 1,
+         	                                'groupName' : groupName,
+         	                                'groupPerNum' : groupPerNum,
+	         	                            'resourceDtoList':null,
+         	                                'isFinished':false,
+         	                                step : 0,
+         	                            };
+         						}
+         					}
+         					else {
+         						app.members[i] = {
+         								number : i + 1,
+     	                                'groupName' : groupName,
+     	                                'groupPerNum' : groupPerNum,
+     	                                'resourceDtoList':null,
+     	                                'isFinished':false,
+     	                                step : 0,
+     	                            };
+         					}
+         					//orderItem 的长度大于 group的数量  ，表示减少组数。
+                          
+                            
+                         }
+     					
+     				}
+     				//减少分组
+     				else {
+     					for ( var i = 0; i < $group.length-1; i++) {
+         					var groupPerNum = $($group[i]).find('.groupNum').val();
+     						//因为orderItem 第一个是bundle，第二个才是含有号码
+     						if(orderItem[i+1].resourceDtoList!=undefined && orderItem[i+1].resourceDtoList.length===parseInt(groupPerNum)) {
+     							app.members[i] = {
+     									number : i + 1,
+     	                                'groupName' : groupName,
+     	                                'groupPerNum' : groupPerNum,
+     	                                'resourceDtoList':orderItem[i+1].resourceDtoList,
+     	                                'isFinished':true,
+     	                                step : 0,
+     	                            };	
+     						}
+     						else {
+     							var resourceDtoList = orderItem[i+1].resourceDtoList;
+     							for (var j=0; j< resourceDtoList.length; j++){
+     								var prefix 	= resourceDtoList[j].prefix;
+    								var acc_nbr = resourceDtoList[j].acc_nbr;
+    								that.unlockAccNbr(prefix,acc_nbr,null);
+     							}
+     							app.members[i] = {
+     									number : i + 1,
+     	                                'groupName' : groupName,
+     	                                'groupPerNum' : groupPerNum,
+     	                               'resourceDtoList':null,
+     	                                'isFinished':false,
+     	                                step : 0,
+     	                            };
+     						}
+                         }
+     				}
+                	
                 }
+                else {
+                	for ( var i = 0; i < $group.length; i++) {
+                		var groupName = $($group[i]).find('.groupName').val();
+                        var groupPerNum = $($group[i]).find('.groupNum').val();
+                        if (groupName != "" && groupName != undefined) {
+                            app.members[i] = {
+                            	number : i + 1,
+                                'groupName' : groupName,
+                                'groupPerNum' : groupPerNum,
+                                'isFinished':false,
+                                step : 0,
+                            };
+
+                        }
+                	}
+                }
+               
+                
+               
                 var total = 0;
-                for ( var i = 0; i < app.groupPerNum.length; i++) {
-                    total = total + parseInt(app.groupPerNum[i]);
+                for ( var i = 0; i < app.members.length; i++) {
+                	if (app.members[i].groupPerNum==null ||app.members[i].groupPerNum ==0){
+                		 var opts = {};
+                         fish.showToast('The number in each group should be greater than 0 , please confirm again.', opts);
+                         return;
+                		
+                	}
+                    total = total + parseInt(app.members[i].groupPerNum);
                 }
+                
                 if (200 < total) {
                     var opts = {};
-                    fish.showToast('The Maximum of Mobiles lines is 200, please confirm again.', opts);
+                    fish.showToast('The Maxinum of Mobiles lines is 200, please confirm again.', opts);
                     return;
+                }else if (total<10){
+                	 var opts = {};
+                     fish.showToast('The Mininum of Mobiles lines is 10, please confirm again.', opts);
+                     return;
                 }
+               
+            }
+            if (app.prev==false) {
+            	app.accNbr = app.fristAccNbr;
             }
             var bundleItemDto = {};
             var bundleVasDto = [];
@@ -215,6 +327,23 @@ function(app//
                 trigger : true
             });
         },
+        
+        unlockAccNbr :function (prefix,acc_nbr,$current) {
+			var that = this ;
+			app.get('accNbr/1.0.0/unlockAccNbr', [prefix,acc_nbr], function(data) {
+				if(data) {	
+					if ($current!=null) {
+						$current.removeClass('active');
+					}
+					return true;
+				}
+				else {
+					alert("Unlock number failed");
+					return false;
+				}
+			});
+
+        },
 
         choose : function(e) {
             var num = 0;
@@ -222,9 +351,14 @@ function(app//
             app.num = num;
             if(app.reModifyBundle){
 				var orderItem = app.orderItemdtoList;
-				var t = orderItem.length-1;
+				var t = 1;
+				for(var i=1; i<orderItem.length; i++){
+					if(orderItem[i].resourceDtoList.length>0){
+						t++;
+					}
+				}
 				for(var i=0; i<num; i++){
-					if(i<=t){
+					if(i < t-1){
 						app.members[i] = {
 								number : i + 1,
 								step : 0,
@@ -309,6 +443,7 @@ function(app//
             var $current = $(e.currentTarget);
             this.$next.attr('disabled', false);
         },
+        
         addGroup : function() {
             var grouptitleDivNum = $(".group-title").length + 1;
             var that = this;
@@ -323,8 +458,15 @@ function(app//
             }
         },
         prev:function(){
-        	app.router.navigate('choose/offer', {
-                trigger : true
+        	require(['views/PrevView'], function (PrevView) {
+                var prevView = new PrevView();
+                prevView.render().$el.appendTo(document.body);
+                prevView.$el.dialog({
+                    autoOpen: true,
+                    modal: true,
+                    width:370,
+                    height:330
+                });
             });
         }
     });

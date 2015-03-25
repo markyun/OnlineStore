@@ -90,20 +90,7 @@ define([ 'app', 'text!templates/CreateAccountTemplate.html' ], function(app,
 						'email' : $email
 					}
 				}, function(data) {
-					console.log(data);
-					if (app.user.acctList) {
-						if (app.user.acctList.length) {
-							app.user.acctList.push(data);
-						} else {
-							var acct = app.user.acctList;
-							app.user.acctList = [];
-							app.user.acctList.push(acct);
-							app.user.acctList.push(data);
-						}
-					} else {
-						app.user.acctList = [];
-						app.user.acctList.push(data);
-					}
+					app.user.acctList.push(data.AcctDto);
 					var selectList = $('.choose-number');
 					for ( var i = 0; i < selectList.length; i++) {
 						$(selectList[i]).append(

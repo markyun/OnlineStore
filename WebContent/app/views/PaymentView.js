@@ -6,9 +6,11 @@ define([ 'app', 'text!templates/PaymentTemplate.html' ],
 			var PaymentView = Backbone.View.extend({
 				template : _.template(template),
 				events : {
-					'click .pay' : 'payNow'
+					'click .pay' : 'payNow',
+					'click .prev-toAccount' : 'prev'
 				},
 				render : function() {
+					if(app.flag === 2){
 					// 完成流程
 					app.post('workflow/1.0.0/finishActivity', {
 						"FinishActivityParamDto" : {
@@ -23,6 +25,7 @@ define([ 'app', 'text!templates/PaymentTemplate.html' ],
 							console.log("isFinished : N");
 						}}
 					);
+					}
 					this.$el.append(this.template({
 						userType : app.userType,
 						packag : app.subsPlanName,
@@ -40,6 +43,7 @@ define([ 'app', 'text!templates/PaymentTemplate.html' ],
 					this.$expirationdate.datetimepicker({
 						viewType : 'date'
 					});
+					this.$pay = this.$('.pay');
 					return this;
 				},
 				payNow : function() {
@@ -96,6 +100,7 @@ define([ 'app', 'text!templates/PaymentTemplate.html' ],
 					$current.removeClass('error');
 					app.send_type = send_type;
 					app.cardNumber = cardNumber;
+					this.$pay.attr('disabled',true);
 						// 提交订单
 						app.post('order/1.0.0/submitOrder', {
 							'SubmitOrderParamDto' : {
@@ -107,7 +112,13 @@ define([ 'app', 'text!templates/PaymentTemplate.html' ],
 								trigger : true
 							});
 						});
-				}
+				},
+			prev : function () {
+				app.isPrev_account = true;
+				app.router.navigate('choose/account', {
+					trigger : true
+				});
+			}
 			});
 
 			return PaymentView;

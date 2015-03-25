@@ -12,6 +12,9 @@ define(
 				allTemplate) {
 			var ChooseOptionalProductView = Backbone.View
 					.extend({
+						attributes: {
+							style: 'display: none'
+						},
 						events : {
 							'click .js-one-option' : 'chooseOne',
 							'click .js-multiply-option' : 'chooseMulti',
@@ -28,17 +31,28 @@ define(
 							app.all = [];
 							if (order && index >= 0) {
 								var vasDtoList = order[index].vasDtoList;
+								if(vasDtoList){
 								for ( var j = 0; j < vasDtoList.length; j++) {
 									var vasDto = vasDtoList[j];
 									if (vasDto.necessary === 0) {
 										if (vasDto.groupType === 'B') {
-											one.push(vasDto.offerId);
+											var ret = {};
+											ret.offerId = vasDto.offerId;
+											ret.attr = vasDto.attr;
+											one.push(ret);
 										} else if (vasDto.groupType === 'C') {
-											multi.push(vasDto.offerId);
+											var ret = {};
+											ret.offerId = vasDto.offerId;
+											ret.attr = vasDto.attr;
+											multi.push(ret);
 										}else if (vasDto.groupType === 'A') {
-											all.push(vasDto.offerId);
+											var ret = {};
+											ret.offerId = vasDto.offerId;
+											ret.attr = vasDto.attr;
+											all.push(ret);
 										}
 									}
+								}
 								}
 								app.one = one;
 								app.multi = multi;
@@ -58,17 +72,28 @@ define(
 								var step = this.member.number;
 								if (order && order.length>step) {
 									var vasDtoList = order[step].vasDtoList;
+									if(vasDtoList){
 									for ( var j = 0; j < vasDtoList.length; j++) {
 										var vasDto = vasDtoList[j];
 										if (vasDto.necessary === 0) {
 											if (vasDto.groupType === 'B') {
-												one.push(vasDto.offerId);
+												var ret = {};
+												ret.offerId = vasDto.offerId;
+												ret.attr = vasDto.attr;
+												one.push(ret);
 											} else if (vasDto.groupType === 'C') {
-												multi.push(vasDto.offerId);
+												var ret = {};
+												ret.offerId = vasDto.offerId;
+												ret.attr = vasDto.attr;
+												multi.push(ret);
 											}else if (vasDto.groupType === 'A') {
-												all.push(vasDto.offerId);
+												var ret = {};
+												ret.offerId = vasDto.offerId;
+												ret.attr = vasDto.attr;
+												all.push(ret);
 											}
 										}
+									}
 									}
 									app.one = one;
 									app.multi = multi;
@@ -192,7 +217,7 @@ define(
 									for ( var i = 0; i < $current.length; i++) {
 										var $currentOne = $($current[i]);
 										for ( var j = 0; j < app.one.length; j++) {
-											if (app.one[j] === $currentOne
+											if (app.one[j].offerId === $currentOne
 													.data('offerId')) {
 												var step = $currentOne
 														.data('indexStep');
@@ -203,6 +228,11 @@ define(
 												$currentOne.addClass('active')
 														.find('.cabin-btn')
 														.html('✔');
+												var attr = $currentOne.find(
+												'.cabin-select').val();
+												if(attr){
+														$currentOne.find(".cabin-select").val(app.one[j].attr);
+													}
 											}
 										}
 									}
@@ -213,12 +243,17 @@ define(
 									for ( var i = 0; i < $current.length; i++) {
 										var $currentMulti = $($current[i]);
 										for ( var j = 0; j < app.multi.length; j++) {
-											if (app.multi[j] === $currentMulti
+											if (app.multi[j].offerId === $currentMulti
 													.data('offerId')) {
 												$currentMulti
 														.addClass('active')
 														.find('.cabin-btn')
 														.html('✔');
+												var attr = $currentMulti.find(
+												'.cabin-select').val();
+												if(attr){
+													$currentMulti.find(".cabin-select").val(app.one[j].attr);
+													}
 											}
 										}
 									}
@@ -229,11 +264,16 @@ define(
 									for ( var i = 0; i < $current.length; i++) {
 										var $currentAll = $($current[i]);
 										for ( var j = 0; j < app.all.length; j++) {
-											if (app.all[j] === $currentAll
+											if (app.all[j].offerId === $currentAll
 													.data('offerId')) {
 												$currentAll.addClass('active')
 														.find('.cabin-btn')
 														.html('✔');
+												var attr = $currentAll.find(
+												'.cabin-select').val();
+												if(attr){
+													$currentAll.find(".cabin-select").val(app.one[j].attr);
+													}
 											}
 										}
 									}

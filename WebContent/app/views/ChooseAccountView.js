@@ -18,7 +18,8 @@ define(
 							'change .selectForGroup' : 'chooseAccountForGroup',
 							'change .selectForAll' : 'chooseAccountForAll',
 							'click .confirm-order' : 'confirmOrder',
-							'click .group-d-list' : 'groupDisplay'
+							'click .group-d-list' : 'groupDisplay',
+							'click .prev-toCheckOrder' : 'prev'
 						},
 
 						render : function() {
@@ -27,17 +28,22 @@ define(
 							this.$continue = this.$('.continue');
 							app.chooseAccount_index = 0;
 							app.group_index = 0;
-							app.accNbrList = [];
-							app.acctIdList = [];
 							var orderItemdtoList = app.orderItemdtoList;
+							
 							var resourceList_show = [];
+							var isPrev = app.isPrev_account;
 							if(app.userType === "business") {
-								this.continueGroup(orderItemdtoList);
+								if(isPrev) {
+									this.continueGroup(orderItemdtoList, 200);
+									this.showPrev();
+								} else {
+									this.continueGroup(orderItemdtoList, 6);
+								}
 							}else {
 								for(var i = 0; i < orderItemdtoList.length; i++) {
 									var orderItem = orderItemdtoList[i];
 									var resourcelist = orderItem.resourceDtoList;
-									if(resourcelist) {
+									if(resourcelist && resourcelist[0].accNbr) {
 										for ( var j = 0; j < resourcelist.length; j++) {
 											if(resourcelist[j]) {
 												resourceList_show.push(resourcelist[j]);
@@ -57,17 +63,22 @@ define(
 									}
 								}
 								app.resourceList_show = resourceList_show;
-								this.next();
+								if(isPrev) {
+									this.next(10);
+									this.showPrev();
+								} else {
+									this.next(6);
+								}
+								
 							}
-							if(!app.user.acctList) {
+							if(app.user.acctList.length === 0) {
 								this.createAccount();
 							}
 							return this;
 						},
 						
-						next: function() {
+						next: function(showAmount) {
 							var that = this;
-							var showAmount = 6;
 							var orderItemdtoList = app.resourceList_show;
 							var showResourceList = [];
 							var remainNum = orderItemdtoList.length - app.chooseAccount_index;
@@ -85,14 +96,16 @@ define(
 							console.log(orderItemdtoList);
 							console.log(showResourceList);
 							this.show(showResourceList, start_index);
-							if(orderItemdtoList.length === app.chooseAccount_index && app.user.acctList) {
-								that.$('.b_choose').attr("disabled",true);
-								that.$('.confirm-order').attr("disabled", false);
+							if(orderItemdtoList.length === app.chooseAccount_index) {
+								that.$('.b_choose').css("display","none");
+								that.$('.end').css("display","block");
+								if(app.user.acctList) {
+									that.$('.confirm-order').attr("disabled", false);
+								}
 							}
 						},
 
-						continueGroup : function(orderItemdtoList){
-							var showAmount = 6;
+						continueGroup : function(orderItemdtoList, showAmount){
 							var showOrderList = [];
 							var remainNum = orderItemdtoList.length - app.group_index;
 							if(remainNum > showAmount) {
@@ -107,9 +120,12 @@ define(
 							}
 							console.log(showOrderList);
 							this.showGroup(showOrderList);
-							if(orderItemdtoList.length === app.group_index && app.user.acctList) {
-								this.$('.b_choose').attr("disabled",true);
-								this.$('.confirm-order').attr("disabled", false);
+							if(orderItemdtoList.length === app.group_index) {
+								this.$('.b_choose').css("display","none");
+								this.$('.end').css("display","block");
+								if(app.user.acctList) {
+									this.$('.confirm-order').attr("disabled", false);
+								}
 							}
 						},
 						show : function(resourceList, start_index) {
@@ -198,7 +214,7 @@ define(
 						    		var $check = $(checkList[i]);
 						    		if($check.hasClass(groupIndex)) {
 						    			$check.parent(".i-checks").eq(0).removeClass('fast');
-						    			var $tr = $check.parentsUntil('tbody').eq(1);
+						    			var $tr = $check.parentsUntil('tbody').eq(2);
 							    		var $select = $tr.children('.selectAccount').children('.acctId');
 							    		$select.attr("disabled", false);
 						    		} 
@@ -209,7 +225,7 @@ define(
 						    		var $check = $(checkList[i]);
 						    		if($check.hasClass(groupIndex)) {
 						    			$check.parent(".i-checks").eq(0).addClass('fast');
-						    			var $tr = $check.parentsUntil('tbody').eq(1);
+						    			var $tr = $check.parentsUntil('tbody').eq(2);
 							    		var $select = $tr.children('.selectAccount').children('.acctId');
 							    		$select.attr("disabled", true);
 						    		} 
@@ -288,6 +304,9 @@ define(
 					    },
 					    
 					    confirmOrder : function() {
+					    	app.accNbrList = [];
+							app.acctIdList = [];
+					    	this.$('.confirm-order').attr("disabled", true);
 					    	var $accNbrList = this.$('.accNbr');
 							var $acctIdList = this.$('.acctId');
 							for(var i = 0; i < $accNbrList.length; i++) {
@@ -298,6 +317,15 @@ define(
 							}
 					    	var accNbrList = app.accNbrList;
 							var acctIdList = app.acctIdList;
+							app.acctForAll = this.$('.selectForAll').val();
+							var $acctForGroup = this.$('.selectForGroup');
+							var groupAcctList = [];
+							for(var i = 0; i < $acctForGroup.length; i++) {
+								groupAcctList.push($($acctForGroup[i]).val());
+							}
+							app.acctForGroupList = groupAcctList;
+							app.$checkboxList = this.$('.checkbox');
+							app.$groupList = this.$('.group-d-list');
 					    	var orderItemdtoList = app.orderItemdtoList;
 					    	for ( var i = 0; i < orderItemdtoList.length; i++) {
 								var OrderItemDto = orderItemdtoList[i];
@@ -307,9 +335,14 @@ define(
 									for ( var j = 0; j < resourcelist.length; j++) {
 										var resource = resourcelist[j];
 										for(var m = 0; m < accNbrList.length; m++) {
-											if(resource.accNbr === accNbrList[m]) {
+											var accNbr = null;
+											if(resource){
+											if(resource.accNbr){
+												accNbr = resource.accNbr.toString();
+											}
+											}
+											if(accNbr === accNbrList[m]) {
 												resource.acctId = acctIdList[m];
-												
 											}
 										}
 									}
@@ -323,7 +356,7 @@ define(
 									for(var j=0; j<vasDtoList.length; j++){
 										var vasDto = vasDtoList[j];
 										for(var k=0; k<vasDto.length; k++){
-											vasDto.operationType = 'M';
+											vasDto.operationType = 'A';
 										}
 									}
 								}
@@ -389,8 +422,74 @@ define(
 									}
 								});
 					    	}
-					    }
+					    },
+					showPrev : function () {
+						var $acctIdList = this.$('.acctId');
+						var acctList = app.acctIdList;
+						this.$('.selectForAll').val(app.acctForAll);
+						for(var i = 0; i < $acctIdList.length; i++) {
+							$($acctIdList[i]).val(acctList[i]);
+						}
+						var $checkboxList = this.$('.checkbox');
+						$checkList = app.$checkboxList;
+						for(var i = 0; i < $checkboxList.length; i++) {
+							var $checkbox = $($checkList[i]);
+							if(!$checkbox.hasClass('fast')) {
+								$($checkboxList[i]).removeClass('fast');
+							} else {
+								$($checkboxList[i]).removeClass('fast');
+								$($checkboxList[i]).addClass('fast');
+							}
+						}
+						if(app.userType === "business") {
+							var $acctForGroup = this.$('.selectForGroup');
+							var groupAcctList = app.acctForGroupList;
+							for(var i = 0; i < $acctForGroup.length; i++) {
+								$($acctForGroup[i]).val(groupAcctList[i]);
+							}
+							var groupList = app.$groupList;
+							var $groupList = this.$('.group-d-list');
+							for(var i = 0; i < groupList.length; i++) {
+								var $group = $($groupList[i]);
+								if(!$(groupList[i]).hasClass('off')) {
+									var groupIndex = $group.data('group');
+									$group.toggleClass('off');
+							    	var $groupItem = this.$('.group-item');
+							    	for(var j = 0; j < $groupItem.length; j++) {
+							    		if($($groupItem[j]).hasClass(groupIndex)) {
+							    			$($groupItem[j]).slideToggle("slow");
+							    		}
+							    	}
+								}
+							}
+						}
+					},
+					prev : function() {
+						app.accNbrList = [];
+						app.acctIdList = [];
+						app.isPrev_account = true;
+						var $accNbrList = this.$('.accNbr');
+						var $acctIdList = this.$('.acctId');
+						for(var i = 0; i < $accNbrList.length; i++) {
+							app.accNbrList.push($($accNbrList[i]).text());
+						}
+						for(var i = 0; i < $acctIdList.length; i++) {
+							app.acctIdList.push($($acctIdList[i]).val());
+						}
+						app.acctForAll = this.$('.selectForAll').val();
+						var $acctForGroup = this.$('.selectForGroup');
+						var groupAcctList = [];
+						for(var i = 0; i < $acctForGroup.length; i++) {
+							groupAcctList.push($($acctForGroup[i]).val());
+						}
+						app.acctForGroupList = groupAcctList;
+						app.$checkboxList = this.$('.checkbox');
+						app.$groupList = this.$('.group-d-list');
+						app.router.navigate('checkOrder', {
+							trigger : true
+						});
 					}
+				}
 			);
 			return ChooseAccountView;
 		

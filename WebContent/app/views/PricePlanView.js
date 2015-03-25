@@ -11,13 +11,20 @@ define(
 						events : {
 							'click .js-next' : 'next',
 							'click .js-save' : 'saveClick',
-							'click .js-prev' : 'prev'
+							'click .js-prev' : 'prev',
+							'click .js-fee':'fee'
 						},
 
 						initialize : function() {
 							this.memberViews = {};
 							Backbone.on('orderFinished', _.bind(
 									this.orderFinished, this));// 监听事件
+							Backbone.on('nextMember', _.bind(
+									this.nextMember, this));
+							Backbone.on('removeOldNbr', _.bind(
+									this.removeOldNbr, this));
+							
+				
 						},
 
 						render : function() {
@@ -42,6 +49,7 @@ define(
 							this.$orderList = this.$('.js-order-list');
 							this.$next = this.$('.js-next');
 							this.$save = this.$('.js-save');
+							this.$fee = this.$('.js-fee');
 							this.initializeMembers();
 							return this;
 						},
@@ -99,27 +107,32 @@ define(
 								}
 							});
 						},
-
+						
 						next : function() {
+							this.$('.js-next').attr("disabled", true);
+							//修改单个号码，调用
 							if(app.modifyRes){
-								this.reSave().done(this.check);
+								this.reSave().then(this.finish).done(this.check);
 							}else if (app.flag == 1) {
 								this.save().then(this.finish).done(this.check);
 							} else {
 								this.save().done(this.check);
 							}
 						},
-						reSave:function(){
+						//重新获取页面上所有数据
+						reSave:function(showSuccMsg){
 							this.save();
 							var orderList = app.orderItemdList;
 							console.log(orderList);
 							var index = app.index;
 							var itemList = [];
-							for(var i=0; i<orderList.length; i++){
-								if(i === index){
-									itemList.push(app.OrderItemDto);
-								}else{
-									itemList.push(orderList[i]);
+							if(orderList && orderList.length){
+								for(var i=0; i<orderList.length; i++){
+									if(i === index){
+										itemList.push(app.OrderItemDto);
+									}else{
+										itemList.push(orderList[i]);
+									}
 								}
 							}
 							app.orderItemdtoList = itemList;
@@ -130,6 +143,10 @@ define(
 									"orderItemDtoList" : app.orderItemdtoList
 								}
 							}, function(data) {
+								if(showSuccMsg){
+									var opts = {};
+								    fish.showToast('Save success!', opts);
+								}
 							});
 						},
 						saveClick : function() {
@@ -147,10 +164,41 @@ define(
 								});
 								return;
 							}
-						    this.save(true);
+							if(app.modifyRes||app.modifyRes){
+								this.reSave(true);
+							}else{
+								this.save(true);
+							}
+						},
+						
+						
+						removeOldNbr :function (prefix,accNbr) {
+							var oldNbrList = this.$(".js-num .old");
+							
+							var oldNbrDetailList = [];
+							for (var i=0;i<oldNbrList.length;i++){
+								if ($(oldNbrList[i]).hasClass("active")) {
+									var prefix = $(oldNbrList[i]).find('.prefix').text();
+									var accNbr = $(oldNbrList[i]).find('.accNbr').text();
+									var oldNbr = {'prefix' :prefix,
+										'accNbr': accNbr
+									};
+									oldNbrDetailList.push(oldNbr);
+								}
+								
+							}
+							
+							app.oldNbrList = oldNbrDetailList;
+						},
+						
+						nextMember : function(member) {
+							
+
+//							$("html, body").animate({"scrollTop": (($(this).offset().top)+50) + "px" }, 500, "swing");
+		        			
+							
 						},
 						save : function(showSuccMsg) {
-							var flag = false;
 							var orderItemdtoList = [];
 							// bundle下必选产品和可选产品
 							if (app.bundleItemDto) {
@@ -222,7 +270,7 @@ define(
 									}
 									// 个人套餐---个人套餐
 									if (app.userType === 'single'
-											&& app.operationType === 'M') {
+											&& app.isMigrate) {
 										flag = true;
 										var resource = {};
 										resource.prefix = app.subs.prefix;
@@ -231,15 +279,15 @@ define(
 										resource.modelId = null;
 										resource.esn = null;
 										resource.offerId = null;
-										resource.accId = null;
+										resource.acctId = null;
 										resourcelist.push(resource);
 									}
 								}
 								OrderItemDto.resourceDtoList = resourcelist;
+								var vasAttrDtoList = [];
 								var currentOne = [];
 								var currentMulti = [];
 								var currentAll = [];
-								var vasAttrDtoList = [];
 								currentOne = $currentTemplate
 										.find('.select-one');
 								currentMulti = $currentTemplate
@@ -272,6 +320,7 @@ define(
 											VasAttrDto.attrId = attr.split(',')[0];
 											VasAttrDto.attrValue = attr.split(',')[1];
 											}
+											ret.attr = attr;
 											}
 											ret.necessary = $currentOne
 													.data('proNecessary');
@@ -285,7 +334,7 @@ define(
 //											}
 											if(VasAttrDto.attrId){
 												vasAttrDtoList.push(VasAttrDto);
-												ret.vasAttrDtoList = vasAttrDtoList
+												ret.vasAttrDtoList = vasAttrDtoList;
 											}
 											vasDtoList.push(ret);
 										}
@@ -310,13 +359,14 @@ define(
 													'.panel-heading').text();
 											ret.saleListPrice = $currentMulti
 													.find('.highlight').text();
-											var attr = $currentOne.find(
+											var attr = $currentMulti.find(
 											'.cabin-select').val();
 											if(attr){
 											if(attr.split(',').length>1){
 											VasAttrDto.attrId = attr.split(',')[0];
 											VasAttrDto.attrValue = attr.split(',')[1];
 											}
+											ret.attr = attr;
 											}
 											ret.necessary = $currentMulti
 													.data('proNecessary');
@@ -330,7 +380,7 @@ define(
 //											}
 											if(VasAttrDto.attrId){
 												vasAttrDtoList.push(VasAttrDto);
-												ret.vasAttrDtoList = vasAttrDtoList
+												ret.vasAttrDtoList = vasAttrDtoList;
 											}
 											vasDtoList.push(ret);
 										}
@@ -356,13 +406,14 @@ define(
 													'.panel-heading').text();
 											ret.comments = $currentAll.find(
 													'.highlight').text();
-											var attr = $currentOne.find(
+											var attr = $currentAll.find(
 											'.cabin-select').val();
 											if(attr){
 											if(attr.split(',').length>1){
 											VasAttrDto.attrId = attr.split(',')[0];
 											VasAttrDto.attrValue = attr.split(',')[1];
 											}
+											ret.attr = attr;
 											}
 											ret.necessary = $currentAll
 													.data('proNecessary');
@@ -376,7 +427,7 @@ define(
 //											}
 												if(VasAttrDto.attrId){
 													vasAttrDtoList.push(VasAttrDto);
-													ret.vasAttrDtoList = vasAttrDtoList
+													ret.vasAttrDtoList = vasAttrDtoList;
 												}
 											vasDtoList.push(ret);
 										}
@@ -413,13 +464,14 @@ define(
 													.text();
 											ret.saleListPrice = $currentOptionOne
 													.find('.highlight').text();
-											var attr = $currentOne.find(
+											var attr = $currentOptionOne.find(
 											'.cabin-select').val();
 											if(attr){
 											if(attr.split(',').length>1){
 											VasAttrDto.attrId = attr.split(',')[0];
 											VasAttrDto.attrValue = attr.split(',')[1];
 											}
+											ret.attr = attr;
 											}
 											ret.necessary = $currentOptionOne
 													.data('proNecessary');
@@ -460,13 +512,14 @@ define(
 													.text();
 											ret.saleListPrice = $currenOptiontMulti
 													.find('.highlight').text();
-											var attr = $currentOne.find(
+											var attr = $currenOptiontMulti.find(
 											'.cabin-select').val();
 											if(attr){
 											if(attr.split(',').length>1){
 											VasAttrDto.attrId = attr.split(',')[0];
 											VasAttrDto.attrValue = attr.split(',')[1];
 											}
+											ret.attr = attr;
 											}
 											ret.necessary = $currenOptiontMulti
 													.data('proNecessary');
@@ -507,13 +560,14 @@ define(
 													.text();
 											ret.saleListPrice = $currentOptionAll
 													.find('.highlight').text();
-											var attr = $currentOne.find(
+											var attr = $currentOptionAll.find(
 											'.cabin-select').val();
 											if(attr){
 											if(attr.split(',').length>1){
 											VasAttrDto.attrId = attr.split(',')[0];
 											VasAttrDto.attrValue = attr.split(',')[1];
 											}
+											ret.attr = attr;
 											}
 											ret.necessary = $currentOptionAll
 													.data('proNecessary');
@@ -527,14 +581,13 @@ define(
 //											}
 												if(VasAttrDto.attrId){
 													vasAttrDtoList.push(VasAttrDto);
-													ret.vasAttrDtoList = vasAttrDtoList
+													ret.vasAttrDtoList = vasAttrDtoList;
 												}
 											vasDtoList.push(ret);
 										}
 									}
 								}
 								OrderItemDto.vasDtoList = vasDtoList;
-
 								// 保存手机信息
 								var Phones = [];
 								Phones = $currentTemplate.find('.phone-btn');
@@ -589,20 +642,46 @@ define(
 						},
 						prev : function() {
 							if (app.userType === 'single') {
-								app.router.navigate('choose/offer', {
-									trigger : true
-								});
+								require(['views/PrevView'], function (PrevView) {
+					                var prevView = new PrevView();
+					                prevView.render().$el.appendTo(document.body);
+					                prevView.$el.dialog({
+					                    autoOpen: true,
+					                    modal: true,
+					                    width:370,
+					                    height:330
+					                });
+					            });
 							} else {
+								//修改bundle标识
 								app.reModifyBundle = true;
+								//单个修改标识
 								app.modifyRes = false;
 								app.prev = true;
 								this.save();
+								app.prev = false;
 								app.router.navigate('choose/group', {
+									"members" :app.members,
 									trigger : true
 								});
 							}
+						},
+						fee:function(){
+							this.$fee.attr('disabled',true);
+							if(app.modifyRes){
+								this.reSave().done(this.feeNext);
+							}else{
+								this.save().done(this.feeNext);
+							}
+							
+						},
+						feeNext:function(){
+							app.reModifyBundle = false;
+							app.modifyRes = false;
+							app.router.navigate('choose/fee', {
+								trigger : true
+							});
 						}
-
 					});
 
 			return PricePlanView;

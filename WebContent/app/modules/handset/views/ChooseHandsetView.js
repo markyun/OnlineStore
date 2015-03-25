@@ -8,6 +8,9 @@ define(
 			var ChooseHandsetView = Backbone.View
 					.extend({
 						template : _.template(template),
+						attributes : {
+							style : 'display: none'
+						},
 						events : {
 							'click .btn-phone' : 'choose',
 							'click .filter_choose' : 'filter',
@@ -25,8 +28,10 @@ define(
 								var vasDtoList = order[index].vasDtoList;
 								for ( var j = 0; j < vasDtoList.length; j++) {
 									var vasDto = vasDtoList[j];
+									if(vasDtoList){
 									if (vasDto.modelId) {
 										onePhone.push(vasDto.modelId);
+									}
 									}
 								}
 								app.onePhone = onePhone;
@@ -41,19 +46,20 @@ define(
 								var step = this.member.number;
 								if (order && order.length > step) {
 									var vasDtoList = order[step].vasDtoList;
+									if(vasDtoList){
 									for ( var j = 0; j < vasDtoList.length; j++) {
 										var vasDto = vasDtoList[j];
 										if (vasDto.modelId) {
 											onePhone.push(vasDto.modelId);
 										}
 									}
+									}
 									app.onePhone = onePhone;
 								}
 							}
 						},
 						render : function() {
-							app.goodsSelect = app.goodsPordSelect;
-							if(app.modifyRes){
+							if (app.modifyRes) {
 								this.initializeMember();
 							}
 							app.sortByPriceFlag = 0;
@@ -134,47 +140,45 @@ define(
 								'phones' : phone,
 								'efferId' : offerId,
 								'effType' : effType,
-								'select' : app.goodsPordSelect
 							}));
 							app.offerId = offerId;
 							app.effType = effType;
 							if (app.orderItemdtoList) {
-							if (app.onePhone.length > 0) {
-								var $current = this.$el.find('.cabin-btn');
-								for ( var i = 0; i < $current.length; i++) {
-									var $currentMulti = $($current[i]);
-									for ( var j = 0; j < app.onePhone.length; j++) {
-										if (app.onePhone[j] === $currentMulti
-												.data('modelId')) {
-											$currentMulti.addClass('active')
-													.html('✔');
+								if (app.onePhone.length > 0) {
+									var $current = this.$el.find('.cabin-btn');
+									for ( var i = 0; i < $current.length; i++) {
+										var $currentMulti = $($current[i]);
+										for ( var j = 0; j < app.onePhone.length; j++) {
+											if (app.onePhone[j] === $currentMulti
+													.data('modelId')) {
+												$currentMulti
+														.addClass('active')
+														.html('✔');
+											}
 										}
 									}
 								}
-							}
 							}
 							app.phones = phone;
 							setTimeout(this.setimg, 55);
 							return this;
 						},
-						setimg:function(){
-							// var phone_name1=this.$(".phone-name").eq(0).text();
-					 	// 	if (phone_name1=='Sumsung S5') {
-					 	//   	console.log($(".phone-name").eq(0).parents(".phone-box").find("img").attr("src"," img/s5.png"));
-							// };
-							// var phone_name2=this.$(".phone-name").eq(1).text();
-					 	// 	if (phone_name2=='Sumsung S4') {
-					 	//   	console.log($(".phone-name").eq(1).parents(".phone-box").find("img").attr("src"," img/s42.png"));
-							// };
-
-							$(".phone-name").each(function() {
-								console.log($(this).text());
-								 if ($(this).text()=='Sumsung S5') {
-						 	  	$(this).parents(".phone-box").find("img").attr("src","img/s5.png");
-								}; if ($(this).text()=='Sumsung S4') {
-						 	  	$(this).parents(".phone-box").find("img").attr("src","img/s42.png");
-								};
-							});
+						setimg : function() {
+							$(".phone-name").each(
+									function() {
+										if ($(this).text() == 'Sumsung S5') {
+											$(this).parents(".phone-box").find(
+													"img").attr("src",
+													"img/s5.png");
+										}
+										;
+										if ($(this).text() == 'Sumsung S4') {
+											$(this).parents(".phone-box").find(
+													"img").attr("src",
+													"img/s42.png");
+										}
+										;
+									});
 						},
 						show : function(phones) {
 							var that = this;
@@ -183,26 +187,18 @@ define(
 								'phones' : phones,
 								'efferId' : app.offerId,
 								'effType' : app.effType,
-								'select' : app.goodsPordSelect
 							}));
+							setTimeout(this.setimg, 55);
 						},
 						choose : function(e) {
-							var goodsId = null;
 							var $current = $(e.currentTarget);
 							if (!$current.hasClass('active')) {
 								this.$wrapper.find('.active').removeClass(
 										'active').html('Choose');
 								$current.addClass('active').html('✔');
-								goodsId = $current.data('modelId');
 							} else {
 								this.$wrapper.find('.active').removeClass(
 										'active').html('Choose');
-								goodsId = null;
-							}
-							if (goodsId != null) {
-								app.goodsSelect = goodsId;
-							} else {
-								app.goodsSelect = goodsId;
 							}
 						},
 						filter : function(event) {
@@ -254,8 +250,8 @@ define(
 								'phones' : app.matchedphones,
 								'efferId' : app.offerId,
 								'effType' : app.effType,
-								'select' : app.goodsPordSelect
 							}));
+							setTimeout(this.setimg, 55);
 							if (app.brand) {
 								this.$('.val').html(app.brand);
 								this.$('.brand_chosed')

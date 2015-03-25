@@ -38,7 +38,7 @@ define(
 											} else {
 												orderFeeList = orderFee;
 											}
-
+											
 											for ( var i = 0; i < orderFeeList.length; i++) {
 												var otcPriceTotal = 0;
 												var otcVasPriceTotal = 0;
@@ -46,12 +46,24 @@ define(
 												var mrcVasPriceTotal = 0;
 												var mrcTotal = 0;
 												var otcTotal = 0;
-												var feeDetail =[];
+												var feeDetail;
+												var accNbrDetail;
+												var accNbrList =[];
+												if(orderFeeList[i].accNbrList !=undefined) {
+													accNbrDetail = orderFeeList[i].accNbrList;
+													if(accNbrDetail.length === undefined) {
+														accNbrList.push(accNbrDetail);
+													}
+													else {
+														accNbrList = accNbrDetail;
+													}
+													orderFeeList[i].accNbrList = accNbrList;
+												}
 												if (orderFeeList[i].feeDetailList != undefined) {
 													feeDetail = orderFeeList[i].feeDetailList;
 													if (feeDetail.length === undefined) {
 
-														feeDetailList.push(orderFee);
+														feeDetailList.push(feeDetail);
 
 													} else {
 														feeDetailList = feeDetail;
@@ -138,64 +150,14 @@ define(
 
 													}));
 											});
+//							setTimeout(function () { 
+//						        $('.blockUI').empty();
+//						        this.$('.js-prev').attr('disabled',false);
+//						        this.$('.js-save').attr('disabled',false);
+//						        this.$('.js-confirm').attr('disabled',false);
+//							},20000);
+							this.$js_confirm = this.$('.js-confirm');
 							return this;
-						},
-
-						modifyVas : function(e) {
-							if (!app.orderView) {
-								app.orderView = new OrderView();
-							}
-							var $current = $(e.currentTarget);
-							var index = $current.data('index');
-							var back_index = $current.data('indexStep');
-							app.orderItemdList = app.orderItemdtoList;
-							if(app.userType === 'single'){
-								app.index = index;
-							}
-							else{
-								app.modifyRes = true;
-								app.reModifyBundle = false;
-								app.index = index+1;
-							}
-							var orderList = app.orderItemdList;
-							
-							 if (app.userType==="family") {
-								 if(orderList.length>app.index){
-										app.modifyaccNbr = orderList[app.index].resourceDtoList[0].accNbr;
-										app.modifyprefix = orderList[app.index].resourceDtoList[0].prefix;
-									}
-							 }
-							 else  if (app.userType==="business"){
-								 if(orderList.length>app.index){
-									 app.NumbersList = orderList[app.index].resourceDtoList;
-								 }
-								 
-							 }
-							
-							console.log(app.modifyNumber);
-							this.$content = $('.panel-body');
-							if (app.userType === 'single'
-									&& app.operationType === 'M') {
-								app.members = [ {
-									number : '1',
-									step : 0,
-									mandatoryProduct : {},
-									optionalProduct : {},
-									handset : {}
-								} ];
-								app.router.navigate('choose/pricePlan', {
-									trigger : true
-								});
-							} else{
-								app.members = [{
-										'index' : '1',
-										'total' : '1',
-										step : 0,
-										}];
-								app.router.navigate('choose/pricePlan', {
-									trigger : true
-								});
-							}
 						},
 						createAccount : function() {
 							require(
@@ -227,6 +189,7 @@ define(
 								});
 								return;
 							}
+							this.$js_confirm.attr('disabled',true);
 							if (app.paidFlag === "Y") {
 
 								app.router.navigate('choose/account', {
@@ -266,6 +229,8 @@ define(
 									});
 								
 							}
+							app.accNbrList = [];
+							app.acctIdList = [];
 						},
 						detailAll : function(e) {
 							var $current = $(e.currentTarget);
@@ -314,6 +279,7 @@ define(
 						prev:function(){
 							app.reModifyBundle = true;
 							app.modifyRes = false;
+							app.orderItemdList = app.orderItemdtoList;
 							// 根据选择的人数来，添加menbers
 							if(app.userType === 'family'){
 								app.members = [];
@@ -328,23 +294,26 @@ define(
 							}else if(app.userType === 'business'){
 								console.log(app.orderItemdList);
 								var orderItem = app.orderItemdtoList;
-								for(var i=0; i< app.members.length; i++){
+								for(var i=0; i< orderItem.length-1; i++){
 									app.members[i] = {
-										'groupName' : app.members[i].groupName,
-										'groupPerNum' : app.members[i].groupPerNum,
+										number : i + 1,
+										'groupPerNum' : orderItem[i+1].qty,
 										'resourceDtoList':orderItem[i+1].resourceDtoList,
 										 'step' : 0,
 										'isFinished':true
 										};
-									app.orderItemdList
 								}
 							}
 							else {
-									app.members[0] = {
+								app.modifyRes = true;
+								app.reModifyBundle = false;
+								app.index = 0;
+								app.members[0] = {
 											number : 1,
 											step : 0
 								}
 							}
+							console.log(app.orderItemdtoList);
 							app.router.navigate('choose/pricePlan', {
 			                    trigger : true
 			                });
@@ -364,6 +333,15 @@ define(
 								});
 								return;
 							}
+							app.post('order/1.0.0/saveOrder', {
+								"CustOrderDto" : {
+									"custOrderId" : app.custOrderId,
+									"orderItemDtoList" : app.orderItemdtoList
+								}
+							}, function(data) {
+								  var opts = {};
+								  fish.showToast('Save success!', opts);
+							});
 						}
 					});
 					

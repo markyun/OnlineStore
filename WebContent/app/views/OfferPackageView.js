@@ -3,18 +3,19 @@
  */
 define([ 'app'//
 , 'text!templates/OfferPackageTemplate.html'//
-, 'text!templates/PartialOfferTemplate.html' ],//
-function(app, template, partialTemplate) {
+, 'text!templates/PartialOfferTemplate.html'
+,'text!templates/MigrateSubsTemplate.html'],//
+function(app, template, partialTemplate,subsTemplate) {
     var OfferPackageView = Backbone.View.extend({
         tagName : 'section',
         className : 'row',
         template : _.template(template),
         events : {
             'click .panel-default' : 'choose',
-            'click .js-next' : 'next'
+            'click .js-next' : 'next',
+            'click .js-prev':'prev'
         },
         render : function() {
-        	app.operationType = null;
 			app.orderItemdtoList = null;
 			app.reModifyBundle = null;
 			app.modifyRes = null;
@@ -123,7 +124,7 @@ function(app, template, partialTemplate) {
                         optionalProduct : {},
                         handset : {}
                     } ];
-                    if(app.operationType){
+                    if(app.isMigrate){
                     	app.router.navigate('choose/migratePlan', {
                             trigger : true
                         });
@@ -168,6 +169,16 @@ function(app, template, partialTemplate) {
                 	
                 }
             });
+        },
+        prev:function(){
+        	app.selectedSubsId = null;
+        	if(app.isMigrate){
+        		app.router.navigate('migrate/offer', {
+					trigger : true
+				});
+        	}else{
+        		window.history.go(-1);
+        	}
         }
     });
 

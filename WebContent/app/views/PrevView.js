@@ -1,5 +1,5 @@
-define([ 'app', 'text!templates/LogoutTemplate.html'], function(app, template) {
-	var LogoutView = Backbone.View.extend({
+define([ 'app', 'text!templates/PrevSuccessTemplate.html'], function(app, template) {
+	var PrevView = Backbone.View.extend({
 		className : 'ui-dialog',
 		events : {
 			'click .Ok' : 'ok',
@@ -14,13 +14,9 @@ define([ 'app', 'text!templates/LogoutTemplate.html'], function(app, template) {
 		},
 		
 		ok : function() {
-			Backbone.trigger('loginoutSuccess');
-			if(app){
-				if(app.user){
-					app.user=null;
-				}
-			}
-			app.router.navigate('', {trigger : true});
+			app.router.navigate('choose/offer', {
+				trigger : true
+			});
 			this.remove();
 			
 		},
@@ -30,5 +26,5 @@ define([ 'app', 'text!templates/LogoutTemplate.html'], function(app, template) {
 			
 		}
 	});
-	return LogoutView;
+	return PrevView;
 });

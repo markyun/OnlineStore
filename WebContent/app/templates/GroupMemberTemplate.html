@@ -1,4 +1,5 @@
 <div class="group-section">
+<%if(members ==undefined ) {%>
 	<div class="group-fbox">
 		<div class="group-box group-chice">
 				<div class="group-title">
@@ -17,8 +18,21 @@
 			<div class="group-content">
 				<input type="text" class="group-input groupNum" value="10">
 			</div>
-		</div>
+		</div> 
 	</div>
+	<%}else{%>
+	<%_.each(members,function(member,index){%>
+	<div class="group-fbox">
+		<div class="group-box group-chice">
+			<div class="group-title">
+				<input type="text" class="group-input groupName" id="group-name" value="Group <%=index+1%>">
+			</div>
+			<div class="group-content">
+				<input type="text" class="group-input groupNum" value="<%=members[index].groupPerNum%>">
+			</div>
+		</div> 
+	</div>
+	<%})}%>
 	<div class="group-box empty add">Add Group</div>
 <!-- 	<div class="group-box empty delete">Delete Group</div> -->
 </div>
@@ -29,6 +43,10 @@ $(function(){
 	});
 	$("body").delegate('.group-fbox', 'mouseleave', function(event) {
  		$(this).find('.close-group').remove();
+ 		var groupFboxList = $(".group-fbox");
+ 		_.each(groupFboxList,function(groupFbox,index){
+ 			$(groupFbox).find(".groupName").val("Group "+(index+1));
+ 		});
 	});
 	$("body").delegate('.close-group', 'click', function(event) {
  		$(this).parents('.group-fbox').remove();

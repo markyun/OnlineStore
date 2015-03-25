@@ -29,18 +29,22 @@ define([ 'app', 'text!templates/MigrateTemplate.html',
 				}
 				for ( var i = 0; i < subsDetail.length; i++) {
 					var subs = subsDetail[i];
-					if (subs.prodStateDate.length > 10) {
-						subsDetail[i].prodStateDate = subs.prodStateDate
-								.substring(0, 10);
-					}
+					if(subs.completedDate){
 					if (subs.completedDate.length > 10) {
 						subsDetail[i].completedDate = subs.completedDate
 								.substring(0, 10);
 					}
+					}
+					if(subs.prodExpDate){
+					if (subs.prodExpDate.length > 10) {
+						subsDetail[i].prodExpDate = subs.prodExpDate
+								.substring(0, 10);
+					}
+					}
 				}
+				app.subsList = subsDetail;
 				that.$migrate.html(_.template(subsTemplate, {
 					'subs' : subsDetail,
-					'flag':app.userplanlist
 				}));
 			});
 			return this;

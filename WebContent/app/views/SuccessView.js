@@ -30,7 +30,7 @@ define(['app','text!templates/PaymentSuccessTemplate.html'],function(app, templa
 						} else {
 							console.log("isFinished : N");
 						}});
-			    }, 2000);
+			    }, 3000);
 				
 			}
 			return this;

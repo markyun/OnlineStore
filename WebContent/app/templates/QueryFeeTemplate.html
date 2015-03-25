@@ -1,7 +1,4 @@
-<div class="col-sm-12 col-md-12 step-header">
-	<span class="step-info">STEP <b>4</b> OF <b>6</b> </span> <span
-		class="step-detail">PLEASE CHECK YOUR ORDER</span>
-</div>
+
 <div class="panel-body regist_bg">
 	<p class="order_txt">Below you will find a summary of your order.
 		You can modify you order in the bill.</p>
@@ -36,7 +33,8 @@
 
 							<td valign="bottom">
 								<%_.each(bundleFeeList,function(bundleFeeDto,index) {%> <span
-								class="subs_td2"><%=bundleFeeDto.feeItemName%></span> <%})%></td>
+								class="subs_td2"><%=bundleFeeDto.feeItemName%></span> <%})%> <i
+								class="update_subsc modifyBundle"> </i></td>
 
 							<td class="subs_td3">
 
@@ -115,7 +113,8 @@
 								<%_.each(orderFee.feeDetailList,function(feeDetailDto,index) {%>
 
 								<span class="subs_td2"><%=feeDetailDto.feeItemName%></span>
-								<%})%> </td>
+								<%})%> <i class="update_subsc modify"
+								data-index="<%=(groupIndex)%>" data-index-step="2"> </i></td>
 							<td class="subs_td3">
 								<p class="p_title">
 									<span>Pre-tax Price (€)</span> <span>Tax (€)</span> <span>Price
@@ -221,7 +220,5 @@
 		</div>
 	</div>
 	<div class="row step-footer">
-		<a
-			class="btn btn-step js-save" href="javascript: void 0">Save</a><a
-			class="btn btn-step js-confirm">Confirm Order</a>
+		<a class="btn btn-step js-prev">Back</a> 
 	</div>

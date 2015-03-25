@@ -51,19 +51,19 @@ define([ 'app', 'text!templates/IndexTemplate.html' ],
 							this.$el.find('.dropdown-toggle').remove();
 							this.$el.find('.dropdown').append(
 									"<a class='dropdown-toggle bg clear' data-toggle='dropdown'>"+
-				                    " <span class=''>Hello"
+				                    " <span class=''>Hello &nbsp;&nbsp;"
 									+  app.user.username +"</span></a>"+
 				                   
 				                    "<ul class='dropdown-menu animated fadeInRight'>"+
-				                     "<li><a class='set' href='#'>set</a></li>"+
-
-				                       "<li><a class ='setUser'>User infromation</a></li>"+
-
-				                        "<li><a class='message' href='#'><span class='badge bg-danger pull-right'>3</span>messages</a></li>"+ 
+//				                     "<li><a class='set' href='#'>set</a></li>"+
+//
+//				                       "<li><a class ='setUser'>User infromation</a></li>"+
+//
+//				                        "<li><a class='message' href='#'><span class='badge bg-danger pull-right'>3</span>messages</a></li>"+ 
+//				                        
+//				                        "<li><a class='help' href='#'>help</a></li>"+
 				                        
-				                        "<li><a class='help' href='#'>help</a></li>"+
-				                        
-				                        "<li><a class='js-logout' data-toggle='ajaxModal'>logout</a></li></ul>");
+				                        "<li><a class='js-logout' data-toggle='ajaxModal' style='cursor: pointer;'>logout</a></li></ul>");
 							 $(".dropdown-toggle").dropdown();
 							
 						},
@@ -112,15 +112,19 @@ define([ 'app', 'text!templates/IndexTemplate.html' ],
 						},
 						shoppingCart:function(){
 							if(app.user.custId){
-								app.get('order/1.0.0/queryCustOrder', [app.user.custId], function(data) {
+								app.get('order/1.0.0/queryCustOrder',[app.user.custId], function(data) {
+										if(data.CustOrderListDto){
+											if(data.CustOrderListDto.custOrderList){
+												app.shoppingCart = data.CustOrderListDto.custOrderList;
+											}
+										}
 										console.log(data);
-										app.router.navigate('choose/successfully', {
+										app.router.navigate('shopping/cart', {
 											trigger : true
 										});
 								});	
 							}
 						}
-						
 					});
 
 			return AppView;

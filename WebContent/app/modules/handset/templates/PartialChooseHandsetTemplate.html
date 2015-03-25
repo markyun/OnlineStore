@@ -16,15 +16,9 @@
 					data-model-id="<%=phone.goodsProdSpec.modelId%>">View
 					details ></button>
 				<div class="phone-price">€<%=phone.saleListPrice/10000%></div>
-				<%if(select === phone.goodsProdSpec.modelId){%>
-				<div class="cabin-btn phone-btn active btn-phone" data-offer-id="<%=efferId%>"
-					data-eff-type="<%=effType%>"
-					data-model-id="<%=phone.goodsProdSpec.modelId%>">✔</div>
-				<%}else{%>
 				<div class="cabin-btn phone-btn btn-phone" data-offer-id="<%=efferId%>"
 					data-eff-type="<%=effType%>"
 					data-model-id="<%=phone.goodsProdSpec.modelId%>">Choose</div>
-				<%}%>
 			</div>
 		</div>
 	</div>

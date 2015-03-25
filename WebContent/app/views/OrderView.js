@@ -1,7 +1,14 @@
 /**
  * Created by huangxinghui on 2015/2/16.
  */
-define(['app', 'text!templates/OrderTemplate.html','text!templates/OrderTemplateByGroup.html'], function (app, template,ordertemplatebygroup) {
+define(['app'
+        , 'text!templates/OrderTemplate.html'
+        ,'text!templates/OrderTemplateByGroup.html'
+        , 'views/ChooseNumberView'
+        , 'modules/product/views/ChooseMandatoryProductView'
+        , 'modules/product/views/ChooseOptionalProductView'
+        , 'modules/handset/views/ChooseHandsetView']
+, function (app, template, ordertemplatebygroup, ChooseNumberView, ChooseMandatoryProductView, ChooseOptionalProductView, ChooseHandsetView) {
     var OrderView = Backbone.View.extend({
         className: 'panel panel-order',
         template: _.template(template),
@@ -12,6 +19,22 @@ define(['app', 'text!templates/OrderTemplate.html','text!templates/OrderTemplate
             'click .js-back': 'handsetBack',
             'click .js-choose':'choose'
         },
+        
+        render: function() {
+        	var that = this;
+        	this.$content = this.$('.panel-body');
+        	
+        	this.steps;
+        	if(app.userType === 'single' && app.isMigrate){
+        		this.steps = app.flow_steps;
+            } else {
+            	this.steps = app.steps;
+            }
+        	
+        	this.steps.forEach(function (step) {
+        		that[step.method]();
+        	});
+        },
 
         initializeMember: function (member) {
         	if(app.userType === "business") {
@@ -21,12 +44,10 @@ define(['app', 'text!templates/OrderTemplate.html','text!templates/OrderTemplate
       			  total: app.members.length,
                   steps: app.steps
                 }));
-    
-      		  
 	        }
         	else {
         		this.member = member;
-        		if(app.userType === 'single' && app.operationType === 'M'){
+        		if(app.userType === 'single' && app.isMigrate){
         			this.$el.append(this.template({
     	                index: _.indexOf(app.members, this.member) + 1,
     	                total: app.members.length,
@@ -39,11 +60,10 @@ define(['app', 'text!templates/OrderTemplate.html','text!templates/OrderTemplate
     	                total: app.members.length,
     	                steps: app.steps
     	            	})); 
-        		
         		}
         	};
-
-            this.$content = this.$('.panel-body');
+        	
+        	this.render();
             this.goTo(this.member.step);
         },
 
@@ -67,21 +87,25 @@ define(['app', 'text!templates/OrderTemplate.html','text!templates/OrderTemplate
 
         goTo: function (step) {
         	var that = this;
-        	if(app.userType === 'single' && app.operationType === 'M'){
+        	if(app.userType === 'single' && app.isMigrate){
         		if (step === app.flow_steps.length) {
         			
         			that.$('.js-step').attr("disabled",true);
-	
                     this.member.isFinished = true;
                     Backbone.trigger('orderFinished', +this.id.substring(6));
+                    Backbone.trigger('nextMember',that.member);
                     return;
                 }
         	}
         	else if (step === app.steps.length) {
         		
+        		$(".js-order-list").delegate('.btn-next', 'click', function() {
+        			$("html, body").animate({"scrollTop": (($(this).offset().top)+50) + "px" }, 500, "swing");
+        		});
         		that.$('.js-step').attr("disabled",true);
                 this.member.isFinished = true;
                 Backbone.trigger('orderFinished', +this.id.substring(6));
+                Backbone.trigger('nextMember',that.member);
                 return;
             }
         	
@@ -93,15 +117,22 @@ define(['app', 'text!templates/OrderTemplate.html','text!templates/OrderTemplate
             if (this.currentView) {
                 this.currentView.$el.hide();//当前的页面隐藏起来
             }
-            if(app.userType === 'single' && app.operationType === 'M'){
-            	this[app.flow_steps[step]['method']]();
-            }
-            else 
-            {
-            	this[app.steps[step]['method']]();
-            }
             
-             	
+            this.currentView = this[this.steps[step]['method'] + 'View'];
+            this.currentView.$el.show();
+            if(step ===1 || step===2){
+       		 var maxheight = 0;
+				 var this_maxdiv;
+				    $(".col-md-3").each(function(index,element) {
+				        if ($(element).height() > maxheight) {
+				            maxheight = $(element).height();
+				            this_maxdiv = $(element);
+				        };
+				    });
+				    $(this_maxdiv).parent().find(".col-md-3").each(function(index,element) {
+				        $(element).find(".panel").height(maxheight - 22);
+				    });
+       	}
         },
         
         stepDisabled : function () {
@@ -110,70 +141,31 @@ define(['app', 'text!templates/OrderTemplate.html','text!templates/OrderTemplate
         
 
         chooseNumber: function () {
-            var that = this;
-            if (!this.chooseNumberView) {
-                require(['views/ChooseNumberView'], function (ChooseNumberView) {
-                    that.chooseNumberView = new ChooseNumberView();
-                    that.currentView = that.chooseNumberView;
-                    that.currentView.initializeMember(that.member); 
-                    that.chooseNumberView.render();
-                    that.$content.append(that.chooseNumberView.$el);
-                });
-            } else {
-                this.chooseNumberView.$el.show();
-                this.currentView = this.chooseNumberView;
-            }
+        	this.chooseNumberView = new ChooseNumberView();
+        	this.chooseNumberView.initializeMember(this.member); 
+        	this.chooseNumberView.render();
+        	this.$content.append(this.chooseNumberView.$el);
         },
 
         chooseMandatoryProduct: function () {
-            var that = this;
-            if (!this.chooseMandatoryProductView) {
-                require(['modules/product/views/ChooseMandatoryProductView'], function (ChooseMandatoryProductView) {
-                    that.chooseMandatoryProductView = new ChooseMandatoryProductView();
-                    that.currentView = that.chooseMandatoryProductView;
-                    that.currentView.initializeMemberAdd(that.member); 
-                    that.chooseMandatoryProductView.render();
-                    that.$content.append(that.chooseMandatoryProductView.$el);
-                    that.currentView = that.chooseMandatoryProductView;
-                });
-            } else {
-                this.chooseMandatoryProductView.$el.show();
-                this.currentView = this.chooseMandatoryProductView;
-            }
+        	this.chooseMandatoryProductView = new ChooseMandatoryProductView();
+        	this.chooseMandatoryProductView.initializeMemberAdd(this.member); 
+        	this.chooseMandatoryProductView.render();
+        	this.$content.append(this.chooseMandatoryProductView.$el);
         },
 
         chooseOptionalProduct: function () {
-            var that = this;
-            if (!this.chooseOptionalProductView) {
-                require(['modules/product/views/ChooseOptionalProductView'], function (ChooseOptionalProductView) {
-                    that.chooseOptionalProductView = new ChooseOptionalProductView();
-                    that.currentView = that.chooseOptionalProductView;
-                    that.currentView.initializeMemberAdd(that.member); 
-                    that.chooseOptionalProductView.render();
-                    that.$content.append(that.chooseOptionalProductView.$el);
-                    that.currentView = that.chooseOptionalProductView;
-                });
-            } else {
-                this.chooseOptionalProductView.$el.show();
-                this.currentView = this.chooseOptionalProductView;
-            }
+        	this.chooseOptionalProductView = new ChooseOptionalProductView();
+        	this.chooseOptionalProductView.initializeMemberAdd(this.member); 
+        	this.chooseOptionalProductView.render();
+        	this.$content.append(this.chooseOptionalProductView.$el);
         },
 
         chooseHandset: function () {
-            var that = this;
-//            if (!this.chooseHandsetView) {
-                require(['modules/handset/views/ChooseHandsetView'], function (ChooseHandsetView) {
-                    that.chooseHandsetView = new ChooseHandsetView();
-                    that.currentView = that.chooseHandsetView;
-                    that.currentView.initializeMemberAdd(that.member); 
-                    that.chooseHandsetView.render();
-                    that.$content.append(that.chooseHandsetView.$el);
-                    that.currentView = that.chooseHandsetView;
-                });
-//            } else {
-//                this.chooseHandsetView.$el.show();
-//                this.currentView = this.chooseHandsetView;
-//            }
+        	this.chooseHandsetView = new ChooseHandsetView();
+        	this.chooseHandsetView.initializeMemberAdd(this.member); 
+        	this.chooseHandsetView.render();
+        	this.$content.append(this.chooseHandsetView.$el);
         },
 
         handsetDetail: function (handsetID) {
@@ -208,6 +200,9 @@ define(['app', 'text!templates/OrderTemplate.html','text!templates/OrderTemplate
         handsetBack: function () {
         	$('.js-step').css('display', 'inline');
         	$('.step-footer').css('display', 'block');
+        	if(app.steps.length === this.member.step){
+        		this.member.step--;
+        	}
             this.goTo(this.member.step);
         },
         choose:function(e){
